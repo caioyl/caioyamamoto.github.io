@@ -272,6 +272,14 @@ h1 {
     align-items: center;
 }
 
+.items {
+    justify-content:baseline;
+}
+
+.text-about {
+    font-size: 1.2rem;
+}
+
 /* EXPERIENCE SECTION */
 
 .bolinha-texto {
@@ -297,7 +305,7 @@ h1 {
     margin-bottom: 0.1rem;
     font-weight: 500;
     line-height: 1.2;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }
 
 .cargo-texto {
@@ -341,4 +349,30 @@ h1 {
 .lista .subitem:last-child {
     margin-bottom: 0px;
     padding-bottom: 0px;
+}
+
+.text-experience {
+    font-size: 1.2rem;
+}
+
+/* CONTACT SECTION */
+
+.contact-title {
+    margin-bottom: 0.1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 1.7rem;
+}
+
+.contact-text {
+    font-size: 1.2rem;
+}
+
+/* FOOTER SECTION */
+
+footer {
+    background-color: #f6f6f6; /* Cor de fundo */
+    text-align: center; /* Alinha o texto ao centro */
+    padding: 10px; /* Espaçamento interno */
+    bottom: 0; /* Posiciona o footer na parte inferior da página */
 }
