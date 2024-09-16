@@ -68,13 +68,13 @@ nav,
 nav {
     justify-content: space-around;
     align-items: center;
-    height: 10vh;
+    height: 8vh;
     position: fixed;
     top: 0;
     width: 100%;
     background-color: #f5f5f5; /* A mesma cor do plano de fundo */
     z-index: 1000; /* Garante que a barra de navegação fique sobre outros elementos */
-   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  Opcional: adiciona uma leve sombra */
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  Opcional: adiciona uma leve sombra
 }
 
 .nav-links {
@@ -108,13 +108,13 @@ a:hover {
 
 section {
     padding-top: 10vh;
-    margin: 0 10rem;
+    margin: 0 8rem;
     box-sizing: border-box;
     min-height: fit-content;
     height: auto;
   }
   
-  .section-container {
+.section-container {
     display: flex;
   }
 
@@ -130,7 +130,7 @@ section {
 .content {
     display: flex;
     align-items: center;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 88px);
 }
 
 .text-content {
@@ -357,22 +357,65 @@ h1 {
 
 /* CONTACT SECTION */
 
+#contact {
+    height: 90vh;
+}
+
 .contact-title {
-    margin-bottom: 0.1rem;
+    margin-top: 5rem; 
+    margin-bottom: 5rem;
     font-weight: 500;
     line-height: 1.2;
     font-size: 1.7rem;
 }
 
 .contact-text {
+    font-style: italic;
     font-size: 1.2rem;
+}
+
+.items {
+    text-align: center;
 }
 
 /* FOOTER SECTION */
 
 footer {
-    background-color: #f6f6f6; /* Cor de fundo */
-    text-align: center; /* Alinha o texto ao centro */
-    padding: 10px; /* Espaçamento interno */
-    bottom: 0; /* Posiciona o footer na parte inferior da página */
+    position: relative;
+    z-index: 10; /* Um valor maior que o z-index da imagem */
+    background-color: #f6f6f6;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
 }
+
+/* PROJECT SECTION */
+
+#project {
+    padding-top: 0vh;
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    height: auto; /* Changed from 90vh to auto to accommodate content */
+    min-height: calc(100vh - 8vh); /* Ensures it takes at least the full viewport height minus nav */
+}
+
+.content-project {
+    display: flex;
+}
+
+.text-project {
+    flex: 1.2;
+    padding-right: 50px;
+    height: 50vh;
+}
+.image-project {
+    flex: 1.8;
+    position: relative;
+    height: 50vh
+}
+
+footer {
+    flex-shrink: 0;
+}
+
