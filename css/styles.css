@@ -149,7 +149,7 @@ h1 {
 .image-content {
     flex: 1;
     position: relative;
-    height: 50vh
+    height: 50vh;
 }
 
 .img-hero {
@@ -361,6 +361,13 @@ h1 {
     height: 90vh;
 }
 
+.content-contact{
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    height: 80vh;
+}
+
 .contact-title {
     margin-top: 5rem; 
     margin-bottom: 5rem;
@@ -372,10 +379,16 @@ h1 {
 .contact-text {
     font-style: italic;
     font-size: 1.2rem;
+    flex: 1;
 }
 
 .items {
     text-align: center;
+}
+
+.contact-lado {
+    flex: 2;
+    justify-content: center;
 }
 
 /* FOOTER SECTION */
@@ -405,17 +418,15 @@ footer {
 }
 
 .text-project {
-    flex: 1.2;
+    flex: 1;
     padding-right: 50px;
     height: 50vh;
 }
 .image-project {
-    flex: 1.8;
+    flex: 2;
     position: relative;
     height: 50vh
 }
 
-footer {
-    flex-shrink: 0;
-}
+/* SLIDESHOW */
 
