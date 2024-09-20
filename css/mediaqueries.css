@@ -1,0 +1,159 @@
+/* Estilos responsivos apenas para telas menores */
+@media screen and (max-width: 768px) {
+    #desktop-nav {
+        display: none;
+      }
+
+    #hamburger-nav {
+        display: flex;
+    }
+
+/* Esconde a navegação de desktop para telas menores */
+@media screen and (max-width: 768px) {
+    #desktop-nav {
+        display: none;
+    }
+
+    #hamburger-nav {
+        display: flex;
+    }
+}
+
+/* Mostra a navegação de desktop para telas maiores */
+@media screen and (min-width: 769px) {
+    #desktop-nav {
+        display: flex;
+    }
+
+    #hamburger-nav {
+        display: none;
+    }
+}
+
+    
+
+    /* Seções responsivas */
+    section {
+        padding-top: 5vh;
+        margin: 0 5%;
+        min-height: auto;
+    }
+
+    /* Profile section responsiva */
+    #profile {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
+    }
+
+    #profile {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
+    }
+
+    .content {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .text-content, .image-content {
+        width: 100%;
+        height: auto;
+        padding-right: 0;
+    }
+
+    /* Projects section responsiva */
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Experiência e contato responsivos */
+    .content-experience, .content-contact {
+        flex-direction: column;
+    }
+
+    /* Ajustes de fonte para melhor legibilidade em telas menores */
+    h1, .h1 { font-size: 2rem; }
+    h2, .h2 { font-size: 1.8rem; }
+    h3, .h3 { font-size: 1.6rem; }
+    h4, .h4 { font-size: 1.4rem; }
+    h5, .h5 { font-size: 1.2rem; }
+    h6, .h6 { font-size: 1rem; }
+
+    .text-about, .text-experience {
+        font-size: 1rem;
+    }
+}
+
+/* Media query para telas muito pequenas (smartphones) */
+@media screen and (max-width: 480px) {
+    section {
+        margin: 0 3%;
+    }
+
+    h1, .h1 { font-size: 1.8rem; }
+    h2, .h2 { font-size: 1.6rem; }
+}
+
+@media screen and (max-width: 1366px) {
+    #profile {
+        height: auto;
+        min-height: 80vh;
+    }
+
+    .content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem 0;
+    }
+
+    .text-content {
+        flex: 1;
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .text-content h1 {
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+
+    .image-content {
+        flex: 1;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .img-hero {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Ajuste mínimo para notebooks menores */
+@media screen and (max-width: 1366px) and (min-width: 769px) {
+    #profile {
+        height: auto;
+        min-height: 80vh;
+    }
+
+    .text-content h1 {
+        font-size: calc(1.5rem + 1vw);
+        line-height: 1.3;
+    }
+
+    .text-content {
+        padding-right: 20px;
+    }
+
+    .image-content {
+        height: auto;
+    }
+
+    .img-hero {
+        max-width: 100%;
+        height: auto;
+    }
+}
