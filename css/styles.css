@@ -430,3 +430,19 @@ footer {
 
 /* SLIDESHOW */
 
+.habilidades {
+    display: flex;
+}
+
+.col1 {
+    flex: 1;
+}
+
+.col2 {
+    flex: 1;
+}
+
+.link {
+    font-style: italic;
+    color:#555555;
+}
