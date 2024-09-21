@@ -1,13 +1,3 @@
-/* Estilos responsivos apenas para telas menores */
-@media screen and (max-width: 768px) {
-    #desktop-nav {
-        display: none;
-      }
-
-    #hamburger-nav {
-        display: flex;
-    }
-
 /* Esconde a navegação de desktop para telas menores */
 @media screen and (max-width: 768px) {
     #desktop-nav {
@@ -17,20 +7,6 @@
     #hamburger-nav {
         display: flex;
     }
-}
-
-/* Mostra a navegação de desktop para telas maiores */
-@media screen and (min-width: 769px) {
-    #desktop-nav {
-        display: flex;
-    }
-
-    #hamburger-nav {
-        display: none;
-    }
-}
-
-    
 
     /* Seções responsivas */
     section {
@@ -86,6 +62,19 @@
     }
 }
 
+/* Mostra a navegação de desktop para telas maiores */
+@media screen and (min-width: 769px) {
+    #desktop-nav {
+        display: flex;
+    }
+
+    #hamburger-nav {
+        display: none;
+    }
+
+    
+}
+
 /* Media query para telas muito pequenas (smartphones) */
 @media screen and (max-width: 480px) {
     section {
@@ -94,6 +83,59 @@
 
     h1, .h1 { font-size: 1.8rem; }
     h2, .h2 { font-size: 1.6rem; }
+
+    /* Seções responsivas */
+    section {
+        padding-top: 5vh;
+        margin: 0 5%;
+        min-height: auto;
+    }
+
+    /* Profile section responsiva */
+    #profile {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
+    }
+
+    #profile {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
+    }
+
+    .content {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .text-content, .image-content {
+        width: 100%;
+        height: auto;
+        padding-right: 0;
+    }
+
+    /* Projects section responsiva */
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Experiência e contato responsivos */
+    .content-experience, .content-contact {
+        flex-direction: column;
+    }
+
+    /* Ajustes de fonte para melhor legibilidade em telas menores */
+    h1, .h1 { font-size: 2rem; }
+    h2, .h2 { font-size: 1.8rem; }
+    h3, .h3 { font-size: 1.6rem; }
+    h4, .h4 { font-size: 1.4rem; }
+    h5, .h5 { font-size: 1.2rem; }
+    h6, .h6 { font-size: 1rem; }
+
+    .text-about, .text-experience {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (max-width: 1366px) {
@@ -130,6 +172,13 @@
         max-width: 100%;
         height: auto;
     }
+
+    .content-project{
+        display:flex;
+        flex-direction: column;
+    }
+
+    
 }
 
 /* Ajuste mínimo para notebooks menores */

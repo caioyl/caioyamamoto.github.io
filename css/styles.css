@@ -338,6 +338,20 @@ h1 {
     background-color: #333333;
 }
 
+.curriculo-btn {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.curriculo-btn:hover {
+    background-color: #333333;
+}
+
 .project-link:hover .project-image,
 .project-link:hover .project-title,
 .project-link:hover .project-description {
