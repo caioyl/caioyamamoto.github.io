@@ -67,6 +67,7 @@ a, .btn {
 .hamburger-menu {
     position: relative;
     display: inline-block;
+    background-color: #f5f5f5;
 }
 
 .hamburger-icon {
@@ -89,7 +90,7 @@ a, .btn {
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: white;
+    background-color: #f5f5f5;
     width: fit-content;
     max-height: 0;
     overflow: hidden;
@@ -104,6 +105,11 @@ a, .btn {
     color: black;
     text-decoration: none;
     transition: all 0.3 ease-in-out;
+    background-color: #f5f5f5;
+}
+
+.menu-links a:hover {
+    color: grey;
 }
 
 .menu-links li {
