@@ -235,11 +235,13 @@ h1 {
     flex: 1;
     position: relative;
     height: 50vh;
+    
 }
 
 .img-hero {
     max-width: 100%;
     height: auto;
+    border-radius: 10px;
 }
 
 /* ABOUT SECTION */
@@ -320,6 +322,7 @@ h1 {
     height: auto;
     display: block;
     transition: transform 0.3s ease; /* Transição para a imagem se mover */
+    border-radius: 10px;
 }
 
 .hidden {
