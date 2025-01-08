@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caio Yamamoto • Portfólio</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/mediaqueries.css">
+    <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X55DR6SDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1X55DR6SDZ');
+</script>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+        </script>
+
+        <!-- Página principal do Blog -->
+        <section id="blog">
+            <div class="container">
+                <div class="header">
+                    <h2>Blog</h2>
+                    <hr>
+                </div>
+                <div class="blog-categories">
+                    <!-- Categoria: Livros Lidos -->
+                    <div class="blog-category">
+                        <a href="blog-livros-lidos.html" class="category-link">
+                            <h3>Livros Lidos</h3>
+                            <p>Reflexões e insights sobre obras que me marcaram.</p>
+                        </a>
+                    </div>
+
+                    <!-- Outras Categorias Exemplo -->
+                    <div class="blog-category">
+                        <a href="blog-projetos.html" class="category-link">
+                            <h3>Projetos Acadêmicos</h3>
+                            <p>Experiências e ideias dos meus projetos educacionais e geográficos.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+    <footer>
+        <p>Copyright &copy; 2024 | Webdesign por Caio Yamamoto | Todos os direitos reservados.</p>
+    </footer>
+</html>
