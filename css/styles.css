@@ -118,7 +118,8 @@ a, .btn {
 }
 
 .menu-links.open {
-    max-height: 300px;
+    overflow: visible;
+    max-height: none;
 }
 
 .hamburger-icon.open span:first-child {
