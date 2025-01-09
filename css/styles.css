@@ -345,6 +345,12 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+.in-progress {
+    font-style: italic; /* Itálico */
+    font-size: 0.8rem;  /* Reduz o tamanho do texto */
+    color: #777;       /* Cor opcional mais suave */
+}
+
 .ver-mais-btn:hover {
     background-color: #333333;
 }

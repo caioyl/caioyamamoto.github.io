@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caio Yamamoto • Portfólio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/mediaqueries.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X55DR6SDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1X55DR6SDZ');
+</script>
+<body>
+    <div class="container">
+                <div id="header-placeholder"></div>
+        <script>
+            fetch('../header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+        </script>
+        <section id="project">
+            <div class="container">
+                <div class="header">
+                    <h2>Brazil. South East, Sao Paulo Region, Rio de Janeiro. The World Atlas</h2>
+                    <hr>
+                </div>
+                <div class="content-project">
+                    <div class="text-project">
+                        <p>Brincando um pouco com renderização 3D.</p>
+                        <p>O mapa do fundo é a página 229 "Brazil, South East, Sao Paulo Region, Rio de Janeiro", do Atlas of the World publicado em 1954 pela União Soviética e disponível em alta resolução na David Rumsey Library.</p>
+                        <p> A cartografia soviética era notória e alguns dos melhores mapas de algumas regiões de vários países foram feitos por lá (Estados Unidos e Reino Unido inclusos.)</p>
+                        <p>Deixo de recomendação o livro <a class="link" href="https://www.amazon.com/Red-Atlas-Soviet-Secretly-Mapped/dp/022638957X">"The Red Atlas: How the Soviet Union Secretly Mapped the World"</a> de John Davies e o vídeo <a class="link" href="https://www.youtube.com/watch?v=_bqzwsM6eoQ">"Why does Russia have the best maps of Britain?"</a> do canal MapMen
+                            </p>
+                    </div>
+                    <div class="image-project">
+                        <img class="img-hero" src="../assets/imagens/renderizado.jpg" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/naorenderizado.jpg" alt="Foto 1">
+                    </div>
+                </div>        
+            </div>
+        </section>
+    </div>
+    <script src="../js/scripts.js"></script>
+</body>
+</html>
