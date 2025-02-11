@@ -144,7 +144,7 @@
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script> <!-- JavaScript do Geocoder -->
   <script>
     // Inicialização do mapa
-    const map = L.map('map').setView([-23.6000, -46.6667], 14);
+    const map = L.map('map').setView([-23.5985457415217, -46.66920089296921], 14);
 
     // Camadas base
     const googleMapsRoadmap = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -198,7 +198,7 @@
     });
 
     // Adicionar marcador do colégio com ícone personalizado
-    const colegio = L.marker([-23.6000, -46.6667], { icon: colegioIcon }).addTo(map);
+    const colegio = L.marker([-23.5985457415217, -46.66920089296921], { icon: colegioIcon }).addTo(map);
     colegio.bindPopup("Escola Móbile").openPopup();
 
     const parqueIbirapuera = L.marker([-23.5875, -46.6576]).addTo(map);
@@ -215,7 +215,7 @@
 
     // Botão para redirecionar para o colégio
     document.getElementById('btn-colegio').addEventListener('click', function () {
-      const colegioCoords = [-23.6000, -46.6667]; // Coordenadas da Escola Móbile
+      const colegioCoords = [-23.5985457415217, -46.66920089296921]; // Coordenadas da Escola Móbile
       map.setView(colegioCoords, 16); // Mantém o nível de zoom atual
       colegio.openPopup(); // Abre o popup do marcador do colégio
     });
