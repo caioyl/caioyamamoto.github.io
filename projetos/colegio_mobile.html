@@ -5,57 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visualizando 1 km² em São Paulo</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" /> <!-- CSS do Geocoder -->
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Fonte Rubik -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/webp" sizes="32x32" href="../assets/imagens/favicon.webp">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Ícones Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Rubik', sans-serif; /* Fonte Rubik */
-      background-color: #F5F5F1; /* Cor de fundo do site */
+      font-family: 'Rubik', sans-serif;
+      background-color: #F5F5F1;
       display: flex;
       flex-direction: column;
     }
     header {
-      background-color: #F5F5F1; /* Cor de fundo do cabeçalho */
-      color: #193C6C; /* Azul do logo para o texto */
+      background-color: #F5F5F1;
+      color: #193C6C;
       padding: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
-      gap: 20px; /* Espaço entre o logo e o texto */
+      gap: 20px;
     }
     header img {
-      height: 50px; /* Altura do logo */
+      height: 50px;
     }
     header h1 {
       margin: 0;
       font-size: 28px;
       font-weight: 700;
-      color: #193C6C; /* Azul do logo */
+      color: #193C6C;
     }
     header p {
       margin: 5px 0 0;
       font-size: 16px;
       font-weight: 400;
-      color: #193C6C; /* Azul do logo com transparência */
+      color: #193C6C;
     }
     #map {
-      flex: 1; /* Ocupa o espaço restante */
-      margin: 20px; /* Margens ao redor do mapa */
-      border-radius: 10px; /* Bordas arredondadas */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+      flex: 1;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     footer {
-      background-color: #F5F5F1; /* Mesma cor do cabeçalho */
-      color: #193C6C; /* Azul do logo */
+      background-color: #F5F5F1;
+      color: #193C6C;
       text-align: center;
       padding: 10px;
       font-size: 14px;
-      font-family: 'Rubik', sans-serif; /* Fonte Rubik */
+      font-family: 'Rubik', sans-serif;
       position: relative;
     }
     footer::before {
@@ -64,33 +64,33 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - 40px); /* Largura do mapa */
+      width: calc(100% - 40px);
       height: 2px;
-      background-color: #193C6C; /* Linha transversal */
+      background-color: #193C6C;
     }
     #btn-colegio {
       position: absolute;
-      top: 130px; /* Posiciona o botão no centro superior do mapa */
-      left: 50%; /* Centraliza horizontalmente */
-      transform: translateX(-50%); /* Ajuste fino para centralização */
-      z-index: 1000; /* Garante que o botão fique acima do mapa */
+      top: 130px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
       padding: 10px 20px;
-      background-color: #50AF47; /* Verde (cor de destaque) */
+      background-color: #50AF47;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-size: 14px;
       font-weight: 500;
-      font-family: 'Rubik', sans-serif; /* Fonte Rubik */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-      transition: background-color 0.3s ease; /* Transição suave */
+      font-family: 'Rubik', sans-serif;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 8px; /* Espaço entre ícone e texto */
+      gap: 8px;
     }
     #btn-colegio:hover {
-      background-color: #3E8C3A; /* Verde mais escuro no hover */
+      background-color: #3E8C3A;
     }
     .leaflet-control-geocoder {
       border-radius: 5px;
@@ -98,41 +98,45 @@
       margin-top: 10px;
     }
     .leaflet-control-geocoder-form input {
-      font-family: 'Rubik', sans-serif; /* Fonte Rubik */
+      font-family: 'Rubik', sans-serif;
       border-radius: 5px;
     }
     .leaflet-control-layers {
-      border-radius: 5px; /* Bordas arredondadas */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-      background: #F5F5F1; /* Fundo branco para o controle de camadas */
-      padding: 10px; /* Espaçamento interno */
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: #F5F5F1;
+      padding: 10px;
       position: absolute;
-      top: 40px; /* Posiciona o controle de camadas abaixo da barra de busca */
-      right: 20px;
+      bottom: 20px;
+      left: 20px;
       z-index: 1000;
-      font-family: 'Rubik', sans-serif; /* Fonte Rubik */
+      font-family: 'Rubik', sans-serif;
     }
     .leaflet-control-layers-expanded {
-      display: block !important; /* Mantém o controle de camadas expandido */
+      display: block !important;
+      padding: 6px 10px 6px 6px;
+      width: auto;
+      min-width: 180px;
     }
+    
     .leaflet-control-layers-toggle {
-      display: none; /* Remove o ícone de alternância */
+      display: none;
     }
     .leaflet-popup-content {
-      font-family: 'Rubik', sans-serif; /* Fonte Rubik para popups */
+      font-family: 'Rubik', sans-serif;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="../assets/imagens/logo.svg" alt="Logo da Escola Móbile"> <!-- Logo da Escola Móbile -->
+    <img src="../assets/imagens/logo.svg" alt="Logo da Escola Móbile">
     <div>
       <h1>Visualizando 1 km² em São Paulo</h1>
       <p>Explore a área ao redor da Escola Móbile e entenda melhor a extensão espacial de 1 km².</p>
     </div>
   </header>
   <button id="btn-colegio">
-    <i class="fas fa-school"></i> <!-- Ícone de escola -->
+    <i class="fas fa-school"></i>
     Voltar para o Colégio
   </button>
   <div id="map"></div>
@@ -140,13 +144,11 @@
     Desenvolvido por Caio Yamamoto
   </footer>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script> <!-- Turf.js para cálculos geográficos -->
-  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script> <!-- JavaScript do Geocoder -->
+  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
   <script>
-    // Inicialização do mapa
     const map = L.map('map').setView([-23.5985457415217, -46.66920089296921], 14);
 
-    // Camadas base
     const googleMapsRoadmap = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
       attribution: '© Google Maps'
     });
@@ -159,65 +161,100 @@
       attribution: '© Google Satellite com Rótulos'
     });
 
-    // Adicionar o Google Maps (Mapa) como camada padrão
     googleMapsRoadmap.addTo(map);
 
-    // Controle de camadas (expandido)
     const baseLayers = {
       "Google Maps (Mapa)": googleMapsRoadmap,
       "Google Maps (Satélite)": googleMapsSatellite,
       "Google Maps (Híbrido)": googleMapsHybrid
     };
-    const layersControl = L.control.layers(baseLayers, null, { collapsed: false }).addTo(map); /* Controle de camadas expandido */
+    
+    const layersControl = L.control.layers(baseLayers, null, {
+      collapsed: false,
+      position: 'bottomleft'
+    }).addTo(map);
 
-    // Função para criar um quadrado de 1 km²
     function createSquare(center) {
-      const side = 1000; // 1 km em metros
+      const side = 1000;
       const halfSide = side / 2;
       const bounds = [
         [center.lat - (halfSide / 111320), center.lng - (halfSide / (111320 * Math.cos((center.lat * Math.PI) / 180)))],
         [center.lat + (halfSide / 111320), center.lng + (halfSide / (111320 * Math.cos((center.lat * Math.PI) / 180)))]
       ];
-      return L.rectangle(bounds, { color: "#0FFFF1", weight: 2, fillOpacity: 0.1 }).addTo(map); /* Verde para o quadrado */
+      return L.rectangle(bounds, { color: "#0FFFF1", weight: 2, fillOpacity: 0.1 }).addTo(map);
     }
 
-    // Crie o quadrado inicial
     let square = createSquare(map.getCenter());
 
-    // Atualize o quadrado ao mover o mapa
     map.on('move', function () {
-      map.removeLayer(square); // Remova o quadrado antigo
-      square = createSquare(map.getCenter()); // Crie um novo quadrado centralizado
+      map.removeLayer(square);
+      square = createSquare(map.getCenter());
     });
 
-    // Ícone personalizado para o colégio (WebP)
     const colegioIcon = L.icon({
-      iconUrl: '../assets/imagens/marker.png', // Caminho para o WebP do logo
-      iconSize: [40, 40], // Tamanho do ícone
-      iconAnchor: [20, 40], // Ponto de ancoragem do ícone
+      iconUrl: '../assets/imagens/marker.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
     });
 
-    // Adicionar marcador do colégio com ícone personalizado
     const colegio = L.marker([-23.5985457415217, -46.66920089296921], { icon: colegioIcon }).addTo(map);
     colegio.bindPopup("Escola Móbile").openPopup();
 
     const parqueIbirapuera = L.marker([-23.5875, -46.6576]).addTo(map);
     parqueIbirapuera.bindPopup("O parque tem cerca de 1,58 km², então um quadrado de 1 km² representa aproximadamente dois terços do parque");
 
-    // Adicionar barra de busca de endereço
-    const geocoder = L.Control.Geocoder.nominatim(); // Usando Nominatim como provedor
-    const controlGeocoder = L.Control.geocoder({
-      defaultMarkGeocode: false, // Não adicionar marcador automaticamente
-      geocoder: geocoder,
-      collapsed: false, // Barra de endereço já aberta
-      placeholder: 'Busque um endereço',
-    }).addTo(map);
+    const geocoder = L.Control.Geocoder.nominatim();
+const controlGeocoder = L.Control.geocoder({
+  defaultMarkGeocode: false,
+  geocoder: geocoder,
+  collapsed: false,
+  placeholder: 'Busque um endereço',
+  suggestMinLength: 3,
+  suggestTimeout: 250,
+  queryMinLength: 3,
+}).on('markgeocode', function(e) {
+  const bbox = e.geocode.bbox;
+  const poly = L.polygon([
+    bbox.getSouthEast(),
+    bbox.getNorthEast(),
+    bbox.getNorthWest(),
+    bbox.getSouthWest()
+  ]);
+  map.fitBounds(poly.getBounds());
+}).addTo(map);
 
-    // Botão para redirecionar para o colégio
+  const geocoderContainer = controlGeocoder.getContainer();
+  const input = geocoderContainer.querySelector('input');
+
+  let timeoutId;
+
+  input.addEventListener('input', function(e) {
+    clearTimeout(timeoutId); // Limpa o timeout anterior
+
+    timeoutId = setTimeout(() => {
+      if (e.target.value.length >= 3) {
+        geocoder.geocode(e.target.value, function(results) {
+          if (results.length > 0) {
+            const result = results[0];
+            if (result.bbox) {
+              const bounds = L.latLngBounds(
+                [result.bbox[0], result.bbox[2]],
+                [result.bbox[1], result.bbox[3]]
+              );
+              map.fitBounds(bounds);
+            } else {
+              map.setView([result.center.lat, result.center.lng], 16);
+            }
+          }
+        });
+      }
+    }, 500); // Ajuste o tempo de atraso conforme necessário (500ms neste exemplo)
+  });
+
     document.getElementById('btn-colegio').addEventListener('click', function () {
-      const colegioCoords = [-23.5985457415217, -46.66920089296921]; // Coordenadas da Escola Móbile
-      map.setView(colegioCoords, 16); // Mantém o nível de zoom atual
-      colegio.openPopup(); // Abre o popup do marcador do colégio
+      const colegioCoords = [-23.5985457415217, -46.66920089296921];
+      map.setView(colegioCoords, 16);
+      colegio.openPopup();
     });
   </script>
 </body>
