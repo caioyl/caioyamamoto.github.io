@@ -173,6 +173,14 @@
         height: auto;
     }
 
+    /* Estilo específico para mapas de Leme em tablets */
+    #mapas-leme .img-hero {
+        max-width: 70%;
+        height: auto;
+        margin: 10px auto;
+        display: block;
+    }
+
     .content-project{
         display:flex;
         flex-direction: column;
@@ -204,5 +212,13 @@
     .img-hero {
         max-width: 100%;
         height: auto;
+    }
+
+    /* Estilo específico para mapas de Leme em dispositivos móveis */
+    #mapas-leme .img-hero {
+        max-width: 80%;
+        height: auto;
+        margin: 10px auto;
+        display: block;
     }
 }

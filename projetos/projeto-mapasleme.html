@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caio Yamamoto • Portfólio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/mediaqueries.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X55DR6SDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1X55DR6SDZ');
+</script>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <script>
+            fetch('../header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+        </script>
+        <section id="project">
+            <div class="container">
+                <div class="header">
+                    <h2>Mapas para Estudo do Meio - Leme</h2>
+                    <hr>
+                </div>
+                <div class="content-project">
+                    <div class="text-project">
+                        <p>Mapa produzido para a área de Geografia da Escola Móbile</p>
+                    </div>
+                    <div class="image-project" id="mapas-leme">
+                        <img class="img-hero" src="../assets/imagens/Trajeto_1.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/Trajeto_2.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - Localização do Município.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - Deslocamento entre áreas.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - Mirante Atualmente - v2.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - Mirante Carta Topográfica - V2.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - RepLago_Atualmente_v2.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - RepLago Carta Topográfica - v2.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - Sítio São José - v2.png" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/A5 - Sítio São José Carta Topográfica - v2.png" alt="Foto 1">
+                    </div>
+                </div>        
+            </div>
+        </section>
+    </div>
+    <script src="../js/scripts.js"></script>
+</body>
+
+</html>
