@@ -1,4 +1,4 @@
-@import url("https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro"); 
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap"); 
 @import url('https://fonts.cdnfonts.com/css/minion-pro');
 
 * {
@@ -7,8 +7,9 @@
 }
 
 body {
-    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
-    background: #f5f5f5;
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+    background: #FEFAF6;
     padding-top: 10vh;
 }
 
@@ -68,7 +69,7 @@ a, .btn {
 .hamburger-menu {
     position: relative;
     display: inline-block;
-    background-color: #f5f5f5;
+    background-color: #FEFAF6;
 }
 
 .hamburger-icon {
@@ -91,7 +92,7 @@ a, .btn {
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #f5f5f5;
+    background-color: #FEFAF6;
     width: fit-content;
     max-height: 0;
     overflow: hidden;
@@ -106,7 +107,7 @@ a, .btn {
     color: black;
     text-decoration: none;
     transition: all 0.3 ease-in-out;
-    background-color: #f5f5f5;
+    background-color: #FEFAF6;
 }
 
 .menu-links a:hover {
@@ -159,9 +160,9 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #f5f5f5; /* A mesma cor do plano de fundo */
+    background-color: #FEFAF6; /* Mesma cor do plano de fundo */
     z-index: 1000; /* Garante que a barra de navegação fique sobre outros elementos */
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  Opcional: adiciona uma leve sombra
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombreado preto */
 }
 
 .nav-links {
@@ -288,6 +289,10 @@ h1 {
 
 .image-container {
     position: relative; /* Necessário para o overlay ficar em cima da imagem */
+    width: 100%;
+    height: 0;
+    padding-bottom: 70.7%; /* Proporção 3507x2480 = 70.7% (2480/3507) */
+    overflow: hidden;
 }
 
 .project-overlay {
@@ -329,8 +334,13 @@ h1 {
 }
 
 .project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain; /* Ajusta a imagem sem recorte, mantendo proporção */
+    object-position: center; /* Centraliza a imagem */
     display: block;
     transition: transform 0.3s ease; /* Transição para a imagem se mover */
     border-radius: 10px;
@@ -532,6 +542,22 @@ footer {
     min-height: calc(100vh - 8vh); /* Ensures it takes at least the full viewport height minus nav */
 }
 
+/* Slideshow específico para imagens de projetos */
+.slideshow-image {
+    transition: opacity 0.8s ease-in-out; /* Transição mais lenta e suave */
+}
+
+/* Garantir que as imagens do slideshow mantenham o tamanho consistente */
+.slideshow-image {
+    object-fit: contain; /* Ajusta sem recorte */
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .content-project {
     display: flex;
 }
@@ -597,7 +623,7 @@ footer {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: white;
+  background-color: #FEFAF6;
   width: fit-content;
   max-height: 0;
   overflow: hidden;

@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const hiddenProjects = document.querySelectorAll('.project-item.hidden');
     const verMaisBtn = document.getElementById('ver-mais');
     let isExpanded = false;
@@ -29,7 +29,7 @@
 });
 
 function initializeImageSlideshow() {
-    // Encontra todas as imagens que tÃªm o atributo data-images
+    // Encontra todas as imagens que têm o atributo data-images
     const slideshowImages = document.querySelectorAll('.slideshow-image[data-images]');
     
     slideshowImages.forEach(img => {
@@ -39,7 +39,7 @@ function initializeImageSlideshow() {
         try {
             const images = JSON.parse(imagesData);
             
-            // SÃ³ inicia o slideshow se hÃ¡ mais de uma imagem
+            // Só inicia o slideshow se há mais de uma imagem
             if (images && images.length > 1) {
                 startSlideshow(img, images, interval);
             }
@@ -52,7 +52,7 @@ function initializeImageSlideshow() {
 function startSlideshow(imgElement, images, interval) {
     let currentIndex = 0;
     
-    // Cria uma segunda imagem para transiÃ§Ãµes suaves
+    // Cria uma segunda imagem para transições suaves
     const imgElement2 = imgElement.cloneNode(true);
     imgElement2.style.position = 'absolute';
     imgElement2.style.top = '0';
@@ -66,14 +66,14 @@ function startSlideshow(imgElement, images, interval) {
     // Insere a segunda imagem no container
     imgElement.parentNode.insertBefore(imgElement2, imgElement);
     
-    // FunÃ§Ã£o para reduzir resoluÃ§Ã£o da imagem
+    // Função para reduzir resolução da imagem
     function createReducedImage(src, callback) {
         const img = new Image();
         img.onload = function() {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
-            // Reduz dimensÃµes para 50%
+            // Reduz dimensões para 50%
             canvas.width = this.width * 0.5;
             canvas.height = this.height * 0.5;
             
@@ -87,7 +87,7 @@ function startSlideshow(imgElement, images, interval) {
         img.src = src;
     }
     
-    // PrÃ©-carrega todas as imagens reduzidas
+    // Pré-carrega todas as imagens reduzidas
     const reducedImages = [];
     let loadedCount = 0;
     
@@ -104,7 +104,7 @@ function startSlideshow(imgElement, images, interval) {
     });
     
     function startImageRotation() {
-        // Configura a transiÃ§Ã£o CSS mais lenta para ambas as imagens
+        // Configura a transição CSS mais lenta para ambas as imagens
         imgElement.style.transition = 'opacity 0.8s ease-in-out';
         imgElement2.style.transition = 'opacity 0.8s ease-in-out';
         
@@ -113,16 +113,16 @@ function startSlideshow(imgElement, images, interval) {
             imgElement.src = reducedImages[0];
         }
         
-        // FunÃ§Ã£o para trocar a imagem com crossfade (loop infinito)
+        // Função para trocar a imagem com crossfade (loop infinito)
         function changeImage() {
-            // Calcula o prÃ³ximo Ã­ndice (volta para 0 apÃ³s a Ãºltima imagem)
+            // Calcula o próximo índice (volta para 0 após a última imagem)
             const nextIndex = (currentIndex + 1) % reducedImages.length;
             
-            // Determina qual imagem estÃ¡ visÃ­vel e qual estÃ¡ escondida
+            // Determina qual imagem está visível e qual está escondida
             const visibleImg = imgElement.style.opacity !== '0' ? imgElement : imgElement2;
             const hiddenImg = imgElement.style.opacity !== '0' ? imgElement2 : imgElement;
             
-            // PrÃ©-carrega a prÃ³xima imagem na imagem escondida
+            // Pré-carrega a próxima imagem na imagem escondida
             hiddenImg.src = reducedImages[nextIndex];
             
             // Aguarda um breve momento para garantir que a imagem foi carregada
@@ -136,7 +136,7 @@ function startSlideshow(imgElement, images, interval) {
         }
         
         // Inicia o timer com intervalos mais longos
-        setInterval(changeImage, Math.max(interval, 4000)); // MÃ­nimo de 4 segundos
+        setInterval(changeImage, Math.max(interval, 4000)); // Mínimo de 4 segundos
     }
 }
 

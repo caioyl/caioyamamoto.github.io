@@ -44,6 +44,13 @@
         grid-template-columns: 1fr;
     }
 
+    /* Proporção fixa para imagens em mobile */
+    .image-container {
+        width: 100%;
+        height: 0;
+        padding-bottom: 70.7%; /* Mantém proporção 3507x2480 */
+    }
+
     /* Experiência e contato responsivos */
     .content-experience, .content-contact {
         flex-direction: column;
