@@ -307,6 +307,7 @@ h1 {
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 3; /* Garantir que o overlay fique acima das imagens do slideshow */
 }
 
 .project-item:hover .project-overlay {
@@ -670,5 +671,18 @@ footer {
 
 .hamburger-icon span:first-child {
   transform: none;
+}
+
+/* Garantir que o overlay funcione com slideshows */
+.project-item .image-container {
+    position: relative;
+}
+
+.project-item .image-container .slideshow-image {
+    z-index: 1;
+}
+
+.project-item .image-container .slideshow-image + .slideshow-image {
+    z-index: 2;
 }
 
