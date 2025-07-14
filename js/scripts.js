@@ -37,13 +37,26 @@ function initializeImageSlideshow() {
         const interval = parseInt(img.getAttribute('data-interval')) || 3000;
         const enableZoom = img.getAttribute('data-enable-zoom') === 'true';
         const zoomDuration = parseInt(img.getAttribute('data-zoom-duration')) || 2000;
+        const zoomCounts = img.getAttribute('data-zoom-counts');
         
         try {
             const images = JSON.parse(imagesData);
+            let zoomCountsArray = [];
             
-            // Só inicia o slideshow se há mais de uma imagem
-            if (images && images.length > 1) {
-                startSlideshow(img, images, interval, enableZoom, zoomDuration);
+            // Parse zoom counts configuration
+            if (zoomCounts) {
+                zoomCountsArray = JSON.parse(zoomCounts);
+            } else if (enableZoom) {
+                // Se zoom está habilitado mas não há configuração específica, usa 1 zoom por padrão
+                zoomCountsArray = images.map(() => 1);
+            } else {
+                // Se zoom não está habilitado, usa 0 zooms
+                zoomCountsArray = images.map(() => 0);
+            }
+            
+            // Inicia o slideshow mesmo se há apenas uma imagem (para permitir zoom)
+            if (images && images.length > 0) {
+                startSlideshow(img, images, interval, zoomCountsArray, zoomDuration);
             }
         } catch (e) {
             console.error('Erro ao processar imagens do slideshow:', e);
@@ -51,7 +64,7 @@ function initializeImageSlideshow() {
     });
 }
 
-function startSlideshow(imgElement, images, interval, enableZoom, zoomDuration) {
+function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDuration) {
     let currentIndex = 0;
     
     // Cria uma segunda imagem para transições suaves
@@ -140,30 +153,41 @@ function startSlideshow(imgElement, images, interval, enableZoom, zoomDuration) 
     // Pré-carrega todas as imagens e seus zooms
     const processedImages = [];
     let loadedCount = 0;
-    const totalImages = images.length * (enableZoom ? 2 : 1);
+    
+    // Calcula o total de imagens (principais + zooms)
+    const totalImages = images.length + zoomCountsArray.reduce((sum, count) => sum + count, 0);
     
     images.forEach((imageSrc, index) => {
         // Carrega a imagem principal reduzida
         createReducedImage(imageSrc, (reducedUrl) => {
             if (!processedImages[index]) {
-                processedImages[index] = {};
+                processedImages[index] = {
+                    main: null,
+                    zooms: []
+                };
             }
             processedImages[index].main = reducedUrl;
             loadedCount++;
             
-            // Se zoom está habilitado, cria o zoom aleatório
-            if (enableZoom) {
-                createRandomZoom(imageSrc, (zoomUrl) => {
-                    processedImages[index].zoom = zoomUrl;
-                    loadedCount++;
-                    
-                    // Quando todas estiverem carregadas, inicia o slideshow
-                    if (loadedCount === totalImages) {
-                        startImageRotation();
-                    }
-                });
+            // Cria os zooms para esta imagem
+            const zoomCount = zoomCountsArray[index] || 0;
+            if (zoomCount > 0) {
+                let zoomsLoaded = 0;
+                
+                for (let i = 0; i < zoomCount; i++) {
+                    createRandomZoom(imageSrc, (zoomUrl) => {
+                        processedImages[index].zooms.push(zoomUrl);
+                        zoomsLoaded++;
+                        loadedCount++;
+                        
+                        // Verifica se todos os zooms desta imagem foram carregados
+                        if (zoomsLoaded === zoomCount && loadedCount === totalImages) {
+                            startImageRotation();
+                        }
+                    });
+                }
             } else {
-                // Se não há zoom, verifica se pode iniciar
+                // Se não há zooms, verifica se pode iniciar
                 if (loadedCount === totalImages) {
                     startImageRotation();
                 }
@@ -185,20 +209,30 @@ function startSlideshow(imgElement, images, interval, enableZoom, zoomDuration) 
         function changeImage() {
             const currentImageData = processedImages[currentIndex];
             
-            if (enableZoom && currentImageData.zoom) {
+            if (currentImageData.zooms && currentImageData.zooms.length > 0) {
                 // Mostra a imagem principal primeiro
                 showImage(currentImageData.main);
                 
-                // Depois mostra o zoom
-                setTimeout(() => {
-                    showImage(currentImageData.zoom);
-                    
-                    // Volta para a próxima imagem após o zoom
-                    setTimeout(() => {
-                        currentIndex = (currentIndex + 1) % processedImages.length;
-                        changeImage();
-                    }, zoomDuration);
-                }, interval);
+                // Cria uma sequência de zooms
+                let zoomIndex = 0;
+                
+                function showNextZoom() {
+                    if (zoomIndex < currentImageData.zooms.length) {
+                        setTimeout(() => {
+                            showImage(currentImageData.zooms[zoomIndex]);
+                            zoomIndex++;
+                            showNextZoom();
+                        }, interval);
+                    } else {
+                        // Após todos os zooms, avança para a próxima imagem
+                        setTimeout(() => {
+                            currentIndex = (currentIndex + 1) % processedImages.length;
+                            changeImage();
+                        }, zoomDuration);
+                    }
+                }
+                
+                showNextZoom();
             } else {
                 // Só mostra a imagem principal
                 showImage(currentImageData.main);
