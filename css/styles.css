@@ -464,6 +464,28 @@ section {
     text-decoration: underline; /* Mantém sublinhado */
 }
 
+.video-link:hover {
+    text-decoration: underline;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 70.7%; /* Proporção 3507x2480 = 70.7% (2480/3507) */
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
 .text-about {
     font-size: 1.2rem;
 }
