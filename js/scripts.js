@@ -3,6 +3,9 @@
     const verMaisBtn = document.getElementById('ver-mais');
     let isExpanded = false;
 
+    // Inicializa o efeito de zoom do mapa
+    initializeMapZoom();
+
     verMaisBtn.addEventListener('click', function() {
         if (!isExpanded) {
             hiddenProjects.forEach((project) => {
@@ -270,5 +273,34 @@ function toggleMenu() {
     const icon = document.querySelector(".hamburger-icon");
     menu.classList.toggle("open");
     icon.classList.toggle("open");
+}
+
+// Função simples para controlar o movimento vertical do mapa
+function initializeMapZoom() {
+    const mapBackground = document.querySelector('.map-background');
+    if (!mapBackground) return;
+
+    // Configurações simples
+    const mapImage = '../assets/mapas-sp/fundo.jpg'; // Uma única imagem
+    const zoomLevel = 400; // Zoom da imagem (quão próximo está)
+    
+    let scrollPosition = 0; // Posição vertical atual
+
+    // Função sincronizada com o scroll normal da página
+    function handleScroll() {
+        const currentScroll = window.scrollY;
+        
+        // Scroll extremamente devagar: mapa se move muito lentamente
+        // Quanto maior o zoomLevel, mais próximo o mapa parece estar
+        scrollPosition = currentScroll * 0.010; // Movimento 20x mais devagar
+        
+        // Aplica movimento sincronizado
+        mapBackground.style.backgroundImage = `url('${mapImage}')`;
+        mapBackground.style.backgroundSize = `${zoomLevel}% auto`;
+        mapBackground.style.backgroundPosition = `center ${scrollPosition}%`;
+    }
+
+    // Event listener
+    window.addEventListener('scroll', handleScroll);
 }
 

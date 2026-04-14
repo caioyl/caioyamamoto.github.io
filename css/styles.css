@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap"); 
-@import url('https://fonts.cdnfonts.com/css/minion-pro');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro"); 
+@import url('https://fonts.cdnfonts.com/css/gara');
 
 * {
     margin: 0;
@@ -7,10 +8,35 @@
 }
 
 body {
-    font-family: 'EB Garamond', serif;
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
     font-weight: 400;
     background: #FEFAF6;
     padding-top: 10vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Plano de fundo com mapa de São Paulo */
+.map-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/mapas-sp/mapa-sp-base.jpg');
+    background-size: 400% auto; /* Zoom fixo configurado no JavaScript */
+    background-position: center top;
+    background-repeat: no-repeat;
+    opacity: 0.05; /* Opacidade baixa para se misturar com o fundo */
+    z-index: -1;
+    transition: opacity 0.5s ease-in-out, background-position 0.3s ease-out;
+    will-change: opacity, background-position, background-image;
+}
+
+/* Container principal para garantir que o conteúdo fique acima do mapa */
+.container {
+    position: relative;
+    z-index: 1;
 }
 
 html {
@@ -218,27 +244,49 @@ section {
 .content {
     display: flex;
     align-items: center;
+    gap: 4rem; /* Espaço entre texto e imagem */
     min-height: calc(100vh - 88px);
 }
 
-.text-content {
-    flex: 2;
-    padding-right: 50px;
-    height: 50vh;
-}
-
-h1 {
-    font-weight: 500;
-    font-size: 50px;
-    line-height: 65px;
-    color: #282828;
-}
-
-.image-content {
+.texto-principal {
     flex: 1;
-    position: relative;
-    height: 50vh;
-    
+    max-width: 500px; /* Limita largura do texto */
+}
+
+.texto-principal h1 {
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 60px;
+    font-style: italic;
+    color: #282828;
+    margin: 0; /* Remove margem padrão */
+}
+
+.texto-principal p {
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 60px;
+    color: #282828;
+    margin: 0; /* Remove margem padrão */
+}
+
+.imagem-container {
+    flex: 0 0 auto; /* Centraliza imagem */
+    max-width: 300px; /* Controla tamanho da imagem */
+}
+
+.imagem-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.img-hero {
+    max-width: 250px; /* Reduz tamanho da foto */
+    height: auto;
+    border-radius: 10px;
 }
 
 .img-hero {
@@ -526,10 +574,34 @@ h1 {
 footer {
     position: relative;
     z-index: 10; /* Um valor maior que o z-index da imagem */
-    background-color: #f6f6f6;
+    background-color: #FEFAF6; /* Mesma cor do background do body */
     text-align: center;
     padding: 10px;
     margin-top: 20px;
+}
+
+/* Imagem do mapa no rodapé com opacidade baixa */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/mapas-sp/fundo.jpg'); /* Mesma imagem do mapa */
+    background-size: 400% auto; /* Zoom igual ao mapa */
+    background-position: center bottom; /* Alinhado na parte de baixo */
+    background-repeat: no-repeat;
+    opacity: 0.05; /* Mesma opacidade do map-background */
+    z-index: -1; /* Atrás do texto */
+}
+
+/* Texto do rodapé para ficar visível */
+footer p {
+    position: relative;
+    z-index: 1; /* Acima da imagem de fundo */
+    color: black; /* Texto preto para contraste */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); /* Sombra clara para legibilidade */
 }
 
 /* PROJECT SECTION */
