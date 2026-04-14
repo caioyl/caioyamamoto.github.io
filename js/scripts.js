@@ -281,7 +281,7 @@ function initializeMapZoom() {
     if (!mapBackground) return;
 
     // Configurações simples
-    const mapImage = '../assets/mapas-sp/fundo.jpg'; // Uma única imagem
+    const mapImage = 'C:\Users\caioy\Documents\GitHub\caioyamamoto.github.io\assets\mapas-sp\fundo.jpg'
     const zoomLevel = 400; // Zoom da imagem (quão próximo está)
     
     let scrollPosition = 0; // Posição vertical atual
