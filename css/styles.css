@@ -23,7 +23,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/mapas-sp/mapa-sp-base.jpg');
+    background-image: url('../assets/mapas-sp/fundo.jpg');
     background-size: 400% auto; /* Zoom fixo configurado no JavaScript */
     background-position: center top;
     background-repeat: no-repeat;
@@ -245,7 +245,7 @@ section {
     display: flex;
     align-items: center;
     gap: 4rem; /* Espaço entre texto e imagem */
-    min-height: calc(100vh - 88px);
+    min-height: calc(80vh - 88px);
 }
 
 .texto-principal {
