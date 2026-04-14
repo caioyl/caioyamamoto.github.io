@@ -250,17 +250,7 @@ section {
 
 .texto-principal {
     flex: 1;
-    max-width: 500px; /* Limita largura do texto */
-}
-
-.texto-principal h1 {
-    font-family: 'EB Garamond', serif;
-    font-weight: 400;
-    font-size: 50px;
-    line-height: 60px;
-    font-style: italic;
-    color: #282828;
-    margin: 0; /* Remove margem padrão */
+    max-width: 700px; /* Aumenta largura para texto caber em 2 linhas */
 }
 
 .texto-principal p {
@@ -452,6 +442,15 @@ section {
 
 .items {
     justify-content:baseline;
+}
+
+.fonte-nome {
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 60px;
+    color: #282828;
+    margin: 0; /* Remove margem padrão */
 }
 
 .text-about {
