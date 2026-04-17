@@ -116,7 +116,7 @@
       display: block !important;
       padding: 6px 10px 6px 6px;
       width: auto;
-      min-width: 180px;
+      min-width: 260px;
     }
     
     .leaflet-control-layers-toggle {
@@ -149,30 +149,165 @@
   <script>
     const map = L.map('map').setView([-23.5985457415217, -46.66920089296921], 14);
 
-    const googleMapsRoadmap = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-      attribution: '© Google Maps'
+    const googleMapsRoadmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: ' OpenStreetMap contributors',
+      subdomains: ['a', 'b', 'c']
     });
 
     const googleMapsSatellite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-      attribution: '© Google Satellite'
+      attribution: ' Google Satellite'
     });
 
     const googleMapsHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-      attribution: '© Google Satellite com Rótulos'
+      attribution: ' Google Satellite com Rótulos'
     });
 
     googleMapsRoadmap.addTo(map);
 
     const baseLayers = {
-      "Google Maps (Mapa)": googleMapsRoadmap,
+      "OpenStreetMap (Mapa)": googleMapsRoadmap,
       "Google Maps (Satélite)": googleMapsSatellite,
       "Google Maps (Híbrido)": googleMapsHybrid
     };
-    
-    const layersControl = L.control.layers(baseLayers, null, {
+
+    const vectorLayers = {};
+
+    const locations = [
+      {
+        name: "Parque Ibirapuera",
+        coords: [-23.5875, -46.6576],
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        iconSize: [25, 41],
+        description: "Parque Ibirapuera - 1,58 km²"
+      },
+      {
+        name: "Avenida Paulista",
+        coords: [-23.5633, -46.6529],
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+        iconSize: [25, 41],
+        description: "Avenida Paulista - Centro Econômico"
+      },
+      {
+        name: "Praça da Sé",
+        coords: [-23.5505, -46.6333],
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+        iconSize: [25, 41],
+        description: "Praça da Sé - Centro Histórico"
+      },
+      {
+        name: "Mineradora Perassoli",
+        coords: [-22.507689150989794, -48.606146086002575],
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+        iconSize: [25, 41],
+        description: "Mineradora Perassoli - São Paulo"
+      },
+      {
+        name: "Mina Serra dos Carajás",
+        coords: [-6.058085097967143, -50.16949285158677],
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+        iconSize: [25, 41],
+        description: "Mina Serra dos Carajás - Pará"
+      }
+    ];
+
+    locations.forEach(location => {
+      const icon = L.icon({
+        iconUrl: location.iconUrl,
+        iconSize: location.iconSize,
+        iconAnchor: [location.iconSize[0]/2, location.iconSize[1]],
+        popupAnchor: [0, -location.iconSize[1]]
+      });
+      
+      const marker = L.marker(location.coords, { 
+        icon: icon,
+        zIndexOffset: 1000 // Garante que fique sobre outras camadas
+      }).addTo(map);
+      
+      marker.bindPopup(`<b>${location.name}</b><br>${location.description}`);
+      
+      marker.on('click', function() {
+        map.setView(location.coords, 16);
+        marker.openPopup();
+      });
+      
+      marker.on('mouseover', function() {
+        this.setZIndexOffset(2000);
+      });
+      
+      marker.on('mouseout', function() {
+        this.setZIndexOffset(1000);
+      });
+      
+      vectorLayers[location.name] = marker;
+    });
+
+    // Função para criar botão de centralizar
+    function createCenterButton(location, marker) {
+      const button = L.DomUtil.create('button');
+      button.innerHTML = '';
+      button.style.backgroundColor = '#50AF47';
+      button.style.color = 'white';
+      button.style.border = 'none';
+      button.style.borderRadius = '3px';
+      button.style.padding = '2px 6px';
+      button.style.cursor = 'pointer';
+      button.style.fontSize = '12px';
+      button.style.marginRight = '8px';
+      button.style.verticalAlign = 'middle';
+      button.title = `Centralizar em ${location.name}`;
+      
+      button.onclick = function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        map.setView(location.coords, 16);
+        marker.openPopup();
+      };
+      
+      return button;
+    }
+
+    // Criar controle de camadas primeiro
+    const layersControl = L.control.layers(baseLayers, vectorLayers, {
       collapsed: false,
       position: 'bottomleft'
     }).addTo(map);
+
+    // Adicionar botões de centralizar após o controle de camadas ser criado
+    setTimeout(function() {
+      const controlContainer = document.querySelector('.leaflet-control-layers');
+      if (controlContainer) {
+        // Adicionar botões para cada localização
+        locations.forEach(location => {
+          const marker = vectorLayers[location.name];
+          if (marker) {
+            const centerButton = createCenterButton(location, marker);
+            const labels = controlContainer.querySelectorAll('label');
+            labels.forEach(label => {
+              const text = label.textContent.trim();
+              if (text.includes(location.name)) {
+                // Inserir botão antes do primeiro elemento (checkbox)
+                label.insertBefore(centerButton, label.firstChild);
+              }
+            });
+          }
+        });
+        
+        // Adicionar botão para Escola Móbile
+        const escolaLocation = {
+          name: "Escola Móbile",
+          coords: [-23.5985457415217, -46.66920089296921]
+        };
+        const escolaCenterButton = createCenterButton(escolaLocation, colegio);
+        const labels = controlContainer.querySelectorAll('label');
+        labels.forEach(label => {
+          const text = label.textContent.trim();
+          if (text.includes("Escola Móbile")) {
+            // Inserir botão antes do primeiro elemento (checkbox)
+            label.insertBefore(escolaCenterButton, label.firstChild);
+          }
+        });
+      }
+    }, 100);
 
     function createSquare(center) {
       const side = 1000;
@@ -197,59 +332,74 @@
       iconAnchor: [20, 40],
     });
 
-    const colegio = L.marker([-23.5985457415217, -46.66920089296921], { icon: colegioIcon }).addTo(map);
+    const colegio = L.marker([-23.5985457415217, -46.66920089296921], { 
+      icon: colegioIcon,
+      zIndexOffset: 1000
+    }).addTo(map);
     colegio.bindPopup("Escola Móbile").openPopup();
-
-    const parqueIbirapuera = L.marker([-23.5875, -46.6576]).addTo(map);
-    parqueIbirapuera.bindPopup("O parque tem cerca de 1,58 km², então um quadrado de 1 km² representa aproximadamente dois terços do parque");
+    
+    colegio.on('click', function() {
+      map.setView([-23.5985457415217, -46.66920089296921], 16);
+      colegio.openPopup();
+    });
+    
+    colegio.on('mouseover', function() {
+      this.setZIndexOffset(2000);
+    });
+    
+    colegio.on('mouseout', function() {
+      this.setZIndexOffset(1000);
+    });
+    
+    vectorLayers["Escola Móbile"] = colegio;
 
     const geocoder = L.Control.Geocoder.nominatim();
-const controlGeocoder = L.Control.geocoder({
-  defaultMarkGeocode: false,
-  geocoder: geocoder,
-  collapsed: false,
-  placeholder: 'Busque um endereço',
-  suggestMinLength: 3,
-  suggestTimeout: 250,
-  queryMinLength: 3,
-}).on('markgeocode', function(e) {
-  const bbox = e.geocode.bbox;
-  const poly = L.polygon([
-    bbox.getSouthEast(),
-    bbox.getNorthEast(),
-    bbox.getNorthWest(),
-    bbox.getSouthWest()
-  ]);
-  map.fitBounds(poly.getBounds());
-}).addTo(map);
+    const controlGeocoder = L.Control.geocoder({
+      defaultMarkGeocode: false,
+      geocoder: geocoder,
+      collapsed: false,
+      placeholder: 'Busque um endereço',
+      suggestMinLength: 3,
+      suggestTimeout: 250,
+      queryMinLength: 3,
+    }).on('markgeocode', function(e) {
+      const bbox = e.geocode.bbox;
+      const poly = L.polygon([
+        bbox.getSouthEast(),
+        bbox.getNorthEast(),
+        bbox.getNorthWest(),
+        bbox.getSouthWest()
+      ]);
+      map.fitBounds(poly.getBounds());
+    }).addTo(map);
 
-  const geocoderContainer = controlGeocoder.getContainer();
-  const input = geocoderContainer.querySelector('input');
+    const geocoderContainer = controlGeocoder.getContainer();
+    const input = geocoderContainer.querySelector('input');
 
-  let timeoutId;
+    let timeoutId;
 
-  input.addEventListener('input', function(e) {
-    clearTimeout(timeoutId); // Limpa o timeout anterior
+    input.addEventListener('input', function(e) {
+      clearTimeout(timeoutId); // Limpa o timeout anterior
 
-    timeoutId = setTimeout(() => {
-      if (e.target.value.length >= 3) {
-        geocoder.geocode(e.target.value, function(results) {
-          if (results.length > 0) {
-            const result = results[0];
-            if (result.bbox) {
-              const bounds = L.latLngBounds(
-                [result.bbox[0], result.bbox[2]],
-                [result.bbox[1], result.bbox[3]]
-              );
-              map.fitBounds(bounds);
-            } else {
-              map.setView([result.center.lat, result.center.lng], 16);
+      timeoutId = setTimeout(() => {
+        if (e.target.value.length >= 3) {
+          geocoder.geocode(e.target.value, function(results) {
+            if (results.length > 0) {
+              const result = results[0];
+              if (result.bbox) {
+                const bounds = L.latLngBounds(
+                  [result.bbox[0], result.bbox[2]],
+                  [result.bbox[1], result.bbox[3]]
+                );
+                map.fitBounds(bounds);
+              } else {
+                map.setView([result.center.lat, result.center.lng], 16);
+              }
             }
-          }
-        });
-      }
-    }, 500); // Ajuste o tempo de atraso conforme necessário (500ms neste exemplo)
-  });
+          });
+        }
+      }, 500); // Ajuste o tempo de atraso conforme necessário (500ms neste exemplo)
+    });
 
     document.getElementById('btn-colegio').addEventListener('click', function () {
       const colegioCoords = [-23.5985457415217, -46.66920089296921];
