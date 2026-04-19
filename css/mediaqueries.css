@@ -8,6 +8,26 @@
         display: flex;
     }
 
+    /* Correção para mapa de fundo em mobile */
+    .map-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-size: 500% auto; /* Ajuste para cobrir melhor em telas mobile */
+        background-position: center center;
+        opacity: 0.08; /* Aumenta um pouco a opacidade para melhor visibilidade */
+        z-index: -1;
+        -webkit-transform: translateZ(0); /* Força aceleração de hardware em iOS */
+        transform: translateZ(0);
+    }
+
+    /* Ajuste do padding-top do body para mobile */
+    body {
+        padding-top: 8vh; /* Reduz o espaçamento do topo em mobile */
+    }
+
     /* Seções responsivas */
     section {
         padding-top: 5vh;
@@ -67,34 +87,85 @@
     .text-about, .text-experience {
         font-size: 1rem;
     }
-}
 
-/* Mostra a navegação de desktop para telas maiores */
-@media screen and (min-width: 769px) {
-    #desktop-nav {
-        display: flex;
+    /* Services CTA Section responsiva */
+    #services-cta {
+        padding: 4rem 0;
     }
 
-    #hamburger-nav {
-        display: none;
+    .services-title {
+        font-size: 2rem;
     }
 
-    
+    .services-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .service-card {
+        padding: 1.5rem;
+    }
+
+    .service-icon-container {
+        width: 64px;
+        height: 64px;
+    }
+
+    .service-icon-container svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .service-card-title {
+        font-size: 1.1rem;
+    }
+
+    .service-card-text {
+        font-size: 0.95rem;
+    }
+
+    .services-cta-text {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .services-cta-button {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+
+    .services-cta {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .services-cta-content {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .services-cta-form-wrapper {
+        padding: 1.5rem;
+    }
 }
 
 /* Media query para telas muito pequenas (smartphones) */
 @media screen and (max-width: 480px) {
-    section {
-        margin: 0 3%;
+    /* Correção adicional para mapa de fundo em smartphones pequenos */
+    .map-background {
+        background-size: 600% auto; /* Maior zoom para cobrir telas estreitas */
+        opacity: 0.1; /* Opacidade ligeiramente maior */
     }
 
-    h1, .h1 { font-size: 1.8rem; }
-    h2, .h2 { font-size: 1.6rem; }
-
-    /* Seções responsivas */
-    section {
-        padding-top: 5vh;
-        margin: 0 5%;
+    /* Ajuste adicional do body para telas muito pequenas */
+    body {
+        padding-top: 7vh;
         min-height: auto;
     }
 
