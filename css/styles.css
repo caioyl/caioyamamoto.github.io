@@ -898,7 +898,7 @@ footer p {
 }
 
 .services-cta-text {
-    font-size: 1.1rem;
+    font-size: 1.35rem;
     color: #282828;
     margin-bottom: 0;
     line-height: 1.6;
@@ -909,6 +909,16 @@ footer p {
     padding: 2rem;
     border-radius: 12px;
     border: 2px solid #e8e4df;
+}
+
+.services-cta-form-title {
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #282828;
+    margin-bottom: 1rem;
+    text-align: left;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
 }
 
 .services-contact-form {
@@ -928,7 +938,7 @@ footer p {
     border-radius: 8px;
     font-size: 1rem;
     font-family: inherit;
-    color: #282828;
+    color: #555555;
     background: #FEFAF6;
     transition: all 300ms ease;
 }
