@@ -965,6 +965,7 @@ footer p {
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
     text-decoration: none;
     transition: all 300ms ease;
     border: 2px solid #282828;
@@ -980,8 +981,29 @@ footer p {
 }
 
 /* SKILLS CAROUSEL */
-.skills-carousel-container {
+.skills-carousel-intro {
+    text-align: center;
     margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+.skills-carousel-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #282828;
+    margin-bottom: 0.5rem;
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+}
+
+.skills-carousel-subtitle {
+    font-size: 1rem;
+    color: #282828;
+    opacity: 0.8;
+    font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+}
+
+.skills-carousel-container {
+    margin-top: 0;
     overflow: hidden;
     padding: 2rem 0;
 }
