@@ -904,6 +904,10 @@ footer p {
     line-height: 1.6;
 }
 
+.services-cta-text-bold {
+    font-weight: 500;
+}
+
 .services-cta-form-wrapper {
     background: #f5f1eb;
     padding: 2rem;
