@@ -281,7 +281,6 @@ function initializeMapZoom() {
     if (!mapBackground) return;
 
     // Configurações simples
-    const mapImage = '/assets/mapas-sp/fundo.jpg'; // Caminho absoluto para a imagem do mapa
     const zoomLevel = 400; // Zoom da imagem (quão próximo está)
 
     let scrollPosition = 0; // Posição vertical atual
@@ -294,8 +293,7 @@ function initializeMapZoom() {
         // Quanto maior o zoomLevel, mais próximo o mapa parece estar
         scrollPosition = currentScroll * 0.010; // Movimento 20x mais devagar
 
-        // Aplica movimento sincronizado
-        mapBackground.style.backgroundImage = `url('${mapImage}')`;
+        // Aplica movimento sincronizado (só muda posição, não a imagem)
         mapBackground.style.backgroundSize = `${zoomLevel}% auto`;
         mapBackground.style.backgroundPosition = `center ${scrollPosition}%`;
     }
