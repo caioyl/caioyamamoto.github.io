@@ -54,6 +54,11 @@
     .content {
         flex-direction: column;
         min-height: auto;
+        align-items: center;
+    }
+
+    .imagem-container {
+        margin: 0 auto;
     }
 
     .text-content, .image-content {
@@ -89,6 +94,15 @@
 
     .text-about, .text-experience {
         font-size: 1rem;
+    }
+
+    /* Profile text mobile layout */
+    .texto-principal p {
+        text-align: center;
+    }
+
+    .fonte-nome {
+        display: block;
     }
 
     /* Services CTA Section responsiva */
