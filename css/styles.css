@@ -23,7 +23,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/mapas-sp/fundo.jpg');
+    background-image: url('/assets/mapas-sp/fundo.jpg');
     background-size: 400% auto; /* Zoom fixo configurado no JavaScript */
     background-position: center top;
     background-repeat: no-repeat;
