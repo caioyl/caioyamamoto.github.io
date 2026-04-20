@@ -40,12 +40,15 @@
         flex-direction: column;
         height: auto;
         gap: 2rem;
+        align-items: center;
     }
+
 
     #profile {
         flex-direction: column;
         height: auto;
         gap: 2rem;
+        align-items: center;
     }
 
     .content {
@@ -103,13 +106,18 @@
     }
 
     .services-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 1.5rem;
         margin-bottom: 3rem;
     }
 
     .service-card {
         padding: 1.5rem;
+    }
+
+    .service-card.featured {
+        grid-column: span 1;
+        max-width: 100%;
     }
 
     .service-icon-container {
@@ -174,12 +182,14 @@
         flex-direction: column;
         height: auto;
         gap: 2rem;
+        align-items: center;
     }
 
     #profile {
         flex-direction: column;
         height: auto;
         gap: 2rem;
+        align-items: center;
     }
 
     .content {
@@ -300,3 +310,5 @@
         display: block;
     }
 }
+
+

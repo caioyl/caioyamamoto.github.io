@@ -129,7 +129,14 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
             const zoomImageUrl = canvas.toDataURL('image/jpeg', 0.8);
             callback(zoomImageUrl);
         };
-        img.src = src;
+        img.onerror = function() {
+            console.error('Erro ao carregar imagem para zoom:', src);
+            // Chama callback com null para indicar falha
+            callback(null);
+        };
+        // Normaliza o caminho removendo ./ se presente
+        const normalizedSrc = src.startsWith('./') ? src.substring(2) : src;
+        img.src = normalizedSrc;
     }
     
     // Função para reduzir resolução da imagem
@@ -150,7 +157,14 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
             const reducedImageUrl = canvas.toDataURL('image/jpeg', 0.8);
             callback(reducedImageUrl);
         };
-        img.src = src;
+        img.onerror = function() {
+            console.error('Erro ao carregar imagem para redução:', src);
+            // Chama callback com null para indicar falha
+            callback(null);
+        };
+        // Normaliza o caminho removendo ./ se presente
+        const normalizedSrc = src.startsWith('./') ? src.substring(2) : src;
+        img.src = normalizedSrc;
     }
     
     // Pré-carrega todas as imagens e seus zooms
@@ -159,17 +173,22 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
     
     // Calcula o total de imagens (principais + zooms)
     const totalImages = images.length + zoomCountsArray.reduce((sum, count) => sum + count, 0);
+    console.log('Iniciando slideshow para', images.length, 'imagens, total a carregar:', totalImages);
     
     images.forEach((imageSrc, index) => {
         // Carrega a imagem principal reduzida
         createReducedImage(imageSrc, (reducedUrl) => {
+            console.log('Imagem principal carregada:', index, imageSrc, 'sucesso:', !!reducedUrl);
             if (!processedImages[index]) {
                 processedImages[index] = {
                     main: null,
                     zooms: []
                 };
             }
-            processedImages[index].main = reducedUrl;
+            // Só adiciona se a imagem foi carregada com sucesso
+            if (reducedUrl) {
+                processedImages[index].main = reducedUrl;
+            }
             loadedCount++;
             
             // Cria os zooms para esta imagem
@@ -179,12 +198,17 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
                 
                 for (let i = 0; i < zoomCount; i++) {
                     createRandomZoom(imageSrc, (zoomUrl) => {
-                        processedImages[index].zooms.push(zoomUrl);
+                        console.log('Zoom carregado para imagem', index, 'sucesso:', !!zoomUrl);
+                        // Só adiciona se o zoom foi carregado com sucesso
+                        if (zoomUrl) {
+                            processedImages[index].zooms.push(zoomUrl);
+                        }
                         zoomsLoaded++;
                         loadedCount++;
                         
                         // Verifica se todos os zooms desta imagem foram carregados
                         if (zoomsLoaded === zoomCount && loadedCount === totalImages) {
+                            console.log('Todas as imagens carregadas, iniciando rotação');
                             startImageRotation();
                         }
                     });
@@ -192,6 +216,7 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
             } else {
                 // Se não há zooms, verifica se pode iniciar
                 if (loadedCount === totalImages) {
+                    console.log('Todas as imagens carregadas (sem zooms), iniciando rotação');
                     startImageRotation();
                 }
             }
