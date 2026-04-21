@@ -298,6 +298,12 @@
         min-height: 80vh;
     }
 
+    #profile .content {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+
     .text-content h1 {
         font-size: calc(1.5rem + 1vw);
         line-height: 1.3;
