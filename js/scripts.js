@@ -327,3 +327,51 @@ function initializeMapZoom() {
     window.addEventListener('scroll', handleScroll);
 }
 
+// Form submission handling for Formspree
+function initializeContactForm() {
+    const form = document.getElementById('services-contact-form');
+    const successMessage = document.getElementById('form-success-message');
+    
+    if (!form || !successMessage) return;
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        
+        // Disable button during submission
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                // Hide form and show success message
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Reset form
+                form.reset();
+            } else {
+                throw new Error('Erro no envio');
+            }
+        }).catch(error => {
+            alert('Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.');
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        });
+    });
+}
+
+// Initialize form handling when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    initializeContactForm();
+});
+
