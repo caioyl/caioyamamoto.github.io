@@ -568,19 +568,20 @@ section {
 /* CONTACT SECTION */
 
 #contact {
-    height: 90vh;
+    height: auto;
+    min-height: 50vh;
 }
 
 .content-contact{
     display: flex;
     justify-content: center;
-    gap: 5rem;
-    height: 80vh;
+    gap: 2rem;
+    height: auto;
 }
 
 .contact-title {
-    margin-top: 5rem; 
-    margin-bottom: 5rem;
+    margin-top: 2rem; 
+    margin-bottom: 2rem;
     font-weight: 500;
     line-height: 1.2;
     font-size: 1.7rem;
