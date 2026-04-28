@@ -6,26 +6,28 @@
     // Inicializa o efeito de zoom do mapa
     initializeMapZoom();
 
-    verMaisBtn.addEventListener('click', function() {
-        if (!isExpanded) {
-            hiddenProjects.forEach((project) => {
-                project.classList.remove('hidden');
-                project.style.display = 'block';
-            });
-            verMaisBtn.textContent = 'Ver menos';
-            isExpanded = true;
-        } else {
-            hiddenProjects.forEach((project) => {
-                project.classList.add('hidden');
-                project.style.display = 'none';
-            });
-            verMaisBtn.textContent = 'Ver mais';
-            isExpanded = false;
-            
-        // Scroll back to the top of the projects section
-        document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+    if (verMaisBtn) {
+        verMaisBtn.addEventListener('click', function() {
+            if (!isExpanded) {
+                hiddenProjects.forEach((project) => {
+                    project.classList.remove('hidden');
+                    project.style.display = 'block';
+                });
+                verMaisBtn.textContent = 'Ver menos';
+                isExpanded = true;
+            } else {
+                hiddenProjects.forEach((project) => {
+                    project.classList.add('hidden');
+                    project.style.display = 'none';
+                });
+                verMaisBtn.textContent = 'Ver mais';
+                isExpanded = false;
+                
+                // Scroll back to the top of the projects section
+                document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 
     // Sistema de slideshow para imagens de projetos
     initializeImageSlideshow();
@@ -134,9 +136,7 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
             // Chama callback com null para indicar falha
             callback(null);
         };
-        // Normaliza o caminho removendo ./ se presente
-        const normalizedSrc = src.startsWith('./') ? src.substring(2) : src;
-        img.src = normalizedSrc;
+        img.src = src;
     }
     
     // Função para reduzir resolução da imagem
@@ -162,18 +162,17 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
             // Chama callback com null para indicar falha
             callback(null);
         };
-        // Normaliza o caminho removendo ./ se presente
-        const normalizedSrc = src.startsWith('./') ? src.substring(2) : src;
-        img.src = normalizedSrc;
+        img.src = src;
     }
     
     // Pré-carrega todas as imagens e seus zooms
     const processedImages = [];
     let loadedCount = 0;
+    let completedCount = 0; // Conta tentativas concluídas (sucesso ou falha)
     
-    // Calcula o total de imagens (principais + zooms)
-    const totalImages = images.length + zoomCountsArray.reduce((sum, count) => sum + count, 0);
-    console.log('Iniciando slideshow para', images.length, 'imagens, total a carregar:', totalImages);
+    // Calcula o total de tentativas (principais + zooms)
+    const totalAttempts = images.length + zoomCountsArray.reduce((sum, count) => sum + count, 0);
+    console.log('Iniciando slideshow para', images.length, 'imagens, total a carregar:', totalAttempts);
     
     images.forEach((imageSrc, index) => {
         // Carrega a imagem principal reduzida
@@ -188,8 +187,11 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
             // Só adiciona se a imagem foi carregada com sucesso
             if (reducedUrl) {
                 processedImages[index].main = reducedUrl;
+                loadedCount++;
+            } else {
+                console.warn('Imagem principal falhou ao carregar:', imageSrc);
             }
-            loadedCount++;
+            completedCount++;
             
             // Cria os zooms para esta imagem
             const zoomCount = zoomCountsArray[index] || 0;
@@ -202,12 +204,13 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
                         // Só adiciona se o zoom foi carregado com sucesso
                         if (zoomUrl) {
                             processedImages[index].zooms.push(zoomUrl);
+                            loadedCount++;
                         }
                         zoomsLoaded++;
-                        loadedCount++;
+                        completedCount++;
                         
-                        // Verifica se todos os zooms desta imagem foram carregados
-                        if (zoomsLoaded === zoomCount && loadedCount === totalImages) {
+                        // Verifica se todos os zooms desta imagem foram processados
+                        if (zoomsLoaded === zoomCount && completedCount === totalAttempts) {
                             console.log('Todas as imagens carregadas, iniciando rotação');
                             startImageRotation();
                         }
@@ -215,7 +218,7 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
                 }
             } else {
                 // Se não há zooms, verifica se pode iniciar
-                if (loadedCount === totalImages) {
+                if (completedCount === totalAttempts) {
                     console.log('Todas as imagens carregadas (sem zooms), iniciando rotação');
                     startImageRotation();
                 }
@@ -224,6 +227,18 @@ function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDurat
     });
     
     function startImageRotation() {
+        // Filtra imagens que falharam ao carregar (main é null)
+        const validImages = processedImages.filter(img => img && img.main !== null);
+        
+        if (validImages.length === 0) {
+            console.error('Nenhuma imagem válida para o slideshow');
+            return;
+        }
+        
+        // Substitui o array original apenas com imagens válidas
+        processedImages.length = 0;
+        validImages.forEach(img => processedImages.push(img));
+        
         // Configura a transição CSS
         imgElement.style.transition = 'opacity 0.8s ease-in-out';
         imgElement2.style.transition = 'opacity 0.8s ease-in-out';
