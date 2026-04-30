@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caio Yamamoto • Portfólio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/mediaqueries.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X55DR6SDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1X55DR6SDZ');
+</script>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <script>
+            fetch('../header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+        </script>
+        <section id="project">
+            <div class="container">
+                <div class="header">
+                    <h2>Maquetes Topográficas</h2>
+                    <hr>
+                </div>
+                <div class="content-project">
+                    <div class="text-project">
+                        <p>Maquete feita pelos alunos do Colégio Rainha da Paz.</p>
+                    </div>
+                    <div class="image-project">
+                        <img class="img-hero" src="../assets/imagens/maquete_1.jpg" alt="Foto 1">
+                        <img class="img-hero" src="../assets/imagens/maquete_2.jpg" alt="Foto 2">
+                        <img class="img-hero" src="../assets/imagens/maquete_3.jpg" alt="Foto 3">
+                        <img class="img-hero" src="../assets/imagens/maquete_4.jpg" alt="Foto 4">
+                    </div>
+                </div>        
+            </div>
+        </section>
+    </div>
+    <script src="../js/scripts.js"></script>
+</body>
+</html>

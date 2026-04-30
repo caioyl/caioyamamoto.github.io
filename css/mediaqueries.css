@@ -283,12 +283,45 @@
         display: block;
     }
 
-    .content-project{
-        display:flex;
+    .content-project {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .text-project {
+        flex: none;
+        width: 100%;
+        padding-right: 0;
+        height: auto;
+        order: -1;
+    }
+
+    .image-project {
+        flex: none;
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+    }
+
+    .map-viewer-container {
         flex-direction: column;
     }
 
-    
+    .map-thumbnails {
+        flex-direction: row;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .map-thumbnails .thumb {
+        flex-shrink: 0;
+        width: 100px;
+    }
+
+    .panzoom-container {
+        height: 350px;
+        max-width: none;
+    }
 }
 
 /* Ajuste mínimo para notebooks menores */
