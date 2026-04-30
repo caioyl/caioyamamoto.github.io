@@ -37,23 +37,179 @@
                     <div class="text-project">
                         <p>Mapa produzido para a área de Geografia da Escola Móbile</p>
                     </div>
-                    <div class="image-project" id="mapas-leme">
-                        <img class="img-hero" src="../assets/imagens/Trajeto_1.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/Trajeto_2.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - Localização do Município.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - Deslocamento entre áreas.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - Mirante Atualmente - v2.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - Mirante Carta Topográfica - V2.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - RepLago_Atualmente_v2.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - RepLago Carta Topográfica - v2.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - Sítio São José - v2.png" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/A5 - Sítio São José Carta Topográfica - v2.png" alt="Foto 1">
+                    <!-- Visualizador Interativo de Mapas -->
+                    <div class="map-viewer-container">
+                        <div class="map-thumbnails">
+                            <div class="thumb active" data-index="0" data-src="../assets/imagens/Trajeto_1.png">
+                                <img src="../assets/imagens/Trajeto_1.png" alt="Trajeto 1">
+                                <span>Trajeto 1</span>
+                            </div>
+                            <div class="thumb" data-index="1" data-src="../assets/imagens/Trajeto_2.png">
+                                <img src="../assets/imagens/Trajeto_2.png" alt="Trajeto 2">
+                                <span>Trajeto 2</span>
+                            </div>
+                            <div class="thumb" data-index="2" data-src="../assets/imagens/A5 - Localização do Município.png">
+                                <img src="../assets/imagens/A5 - Localização do Município.png" alt="Localização">
+                                <span>Localização</span>
+                            </div>
+                            <div class="thumb" data-index="3" data-src="../assets/imagens/A5 - Deslocamento entre áreas.png">
+                                <img src="../assets/imagens/A5 - Deslocamento entre áreas.png" alt="Deslocamento">
+                                <span>Deslocamento</span>
+                            </div>
+                            <div class="thumb" data-index="4" data-src="../assets/imagens/A5 - Mirante Atualmente - v2.png">
+                                <img src="../assets/imagens/A5 - Mirante Atualmente - v2.png" alt="Mirante">
+                                <span>Mirante</span>
+                            </div>
+                            <div class="thumb" data-index="5" data-src="../assets/imagens/A5 - Mirante Carta Topográfica - V2.png">
+                                <img src="../assets/imagens/A5 - Mirante Carta Topográfica - V2.png" alt="Mirante Topo">
+                                <span>Mirante Topo</span>
+                            </div>
+                            <div class="thumb" data-index="6" data-src="../assets/imagens/A5 - RepLago_Atualmente_v2.png">
+                                <img src="../assets/imagens/A5 - RepLago_Atualmente_v2.png" alt="RepLago">
+                                <span>RepLago</span>
+                            </div>
+                            <div class="thumb" data-index="7" data-src="../assets/imagens/A5 - RepLago Carta Topográfica - v2.png">
+                                <img src="../assets/imagens/A5 - RepLago Carta Topográfica - v2.png" alt="RepLago Topo">
+                                <span>RepLago Topo</span>
+                            </div>
+                            <div class="thumb" data-index="8" data-src="../assets/imagens/A5 - Sítio São José - v2.png">
+                                <img src="../assets/imagens/A5 - Sítio São José - v2.png" alt="Sítio">
+                                <span>Sítio</span>
+                            </div>
+                            <div class="thumb" data-index="9" data-src="../assets/imagens/A5 - Sítio São José Carta Topográfica - v2.png">
+                                <img src="../assets/imagens/A5 - Sítio São José Carta Topográfica - v2.png" alt="Sítio Topo">
+                                <span>Sítio Topo</span>
+                            </div>
+                        </div>
+                        
+                        <div class="panzoom-container">
+                            <div class="panzoom-image-wrapper">
+                                <img id="main-map-image" src="../assets/imagens/Trajeto_1.png" alt="Mapa">
+                            </div>
+                            <div class="panzoom-controls">
+                                <button id="zoom-in" title="Aumentar zoom">+</button>
+                                <button id="zoom-out" title="Diminuir zoom">−</button>
+                                <button id="zoom-reset" title="Resetar">⟲</button>
+                                <button id="prev-map" title="Anterior">◀</button>
+                                <button id="next-map" title="Próximo">▶</button>
+                            </div>
+                            <div class="panzoom-info">
+                                <span id="zoom-level">100%</span> | Use scroll para zoom, arraste para mover
+                            </div>
+                        </div>
                     </div>
                 </div>        
             </div>
         </section>
     </div>
     <script src="../js/scripts.js"></script>
+    <script>
+        // Visualizador Interativo de Mapas - Pan e Zoom
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageWrapper = document.querySelector('.panzoom-image-wrapper');
+            const mainImage = document.getElementById('main-map-image');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+            const thumbnails = document.querySelectorAll('.thumb');
+            
+            let scale = 1;
+            let panning = false;
+            let pointX = 0;
+            let pointY = 0;
+            let startX = 0;
+            let startY = 0;
+            let currentMapIndex = 0;
+            
+            const mapImages = [
+                '../assets/imagens/Trajeto_1.png',
+                '../assets/imagens/Trajeto_2.png',
+                '../assets/imagens/A5 - Localização do Município.png',
+                '../assets/imagens/A5 - Deslocamento entre áreas.png',
+                '../assets/imagens/A5 - Mirante Atualmente - v2.png',
+                '../assets/imagens/A5 - Mirante Carta Topográfica - V2.png',
+                '../assets/imagens/A5 - RepLago_Atualmente_v2.png',
+                '../assets/imagens/A5 - RepLago Carta Topográfica - v2.png',
+                '../assets/imagens/A5 - Sítio São José - v2.png',
+                '../assets/imagens/A5 - Sítio São José Carta Topográfica - v2.png'
+            ];
+            
+            function updateTransform() {
+                mainImage.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+                zoomLevelDisplay.textContent = Math.round(scale * 100) + '%';
+            }
+            
+            function resetView() {
+                scale = 1;
+                pointX = 0;
+                pointY = 0;
+                updateTransform();
+            }
+            
+            function loadMap(index) {
+                currentMapIndex = index;
+                mainImage.src = mapImages[index];
+                resetView();
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
+            }
+            
+            document.getElementById('zoom-in').addEventListener('click', function() {
+                scale = Math.min(scale * 1.2, 5);
+                updateTransform();
+            });
+            
+            document.getElementById('zoom-out').addEventListener('click', function() {
+                scale = Math.max(scale / 1.2, 0.5);
+                if (scale < 1) { pointX = 0; pointY = 0; }
+                updateTransform();
+            });
+            
+            document.getElementById('zoom-reset').addEventListener('click', resetView);
+            
+            document.getElementById('prev-map').addEventListener('click', function() {
+                const newIndex = (currentMapIndex - 1 + mapImages.length) % mapImages.length;
+                loadMap(newIndex);
+            });
+            
+            document.getElementById('next-map').addEventListener('click', function() {
+                const newIndex = (currentMapIndex + 1) % mapImages.length;
+                loadMap(newIndex);
+            });
+            
+            thumbnails.forEach((thumb, index) => {
+                thumb.addEventListener('click', function() {
+                    loadMap(index);
+                });
+            });
+            
+            imageWrapper.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                panning = true;
+                startX = e.clientX - pointX;
+                startY = e.clientY - pointY;
+                imageWrapper.style.cursor = 'grabbing';
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (!panning) return;
+                e.preventDefault();
+                pointX = e.clientX - startX;
+                pointY = e.clientY - startY;
+                updateTransform();
+            });
+            
+            document.addEventListener('mouseup', function() {
+                panning = false;
+                imageWrapper.style.cursor = 'grab';
+            });
+            
+            imageWrapper.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                scale = Math.min(Math.max(scale * delta, 0.5), 5);
+                updateTransform();
+            });
+        });
+    </script>
 </body>
-
 </html>

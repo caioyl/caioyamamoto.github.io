@@ -37,16 +37,71 @@
                     <div class="text-project">
                         <p>Maquete feita pelos alunos do Colégio Rainha da Paz.</p>
                     </div>
-                    <div class="image-project">
-                        <img class="img-hero" src="../assets/imagens/maquete_1.jpg" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/maquete_2.jpg" alt="Foto 2">
-                        <img class="img-hero" src="../assets/imagens/maquete_3.jpg" alt="Foto 3">
-                        <img class="img-hero" src="../assets/imagens/maquete_4.jpg" alt="Foto 4">
+                    <!-- Visualizador Interativo de Mapas -->
+                    <div class="map-viewer-container">
+                        <div class="map-thumbnails">
+                            <div class="thumb active" data-index="0" data-src="../assets/imagens/maquete_1.jpg">
+                                <img src="../assets/imagens/maquete_1.jpg" alt="Maquete 1">
+                                <span>Foto 1</span>
+                            </div>
+                            <div class="thumb" data-index="1" data-src="../assets/imagens/maquete_2.jpg">
+                                <img src="../assets/imagens/maquete_2.jpg" alt="Maquete 2">
+                                <span>Foto 2</span>
+                            </div>
+                            <div class="thumb" data-index="2" data-src="../assets/imagens/maquete_3.jpg">
+                                <img src="../assets/imagens/maquete_3.jpg" alt="Maquete 3">
+                                <span>Foto 3</span>
+                            </div>
+                            <div class="thumb" data-index="3" data-src="../assets/imagens/maquete_4.jpg">
+                                <img src="../assets/imagens/maquete_4.jpg" alt="Maquete 4">
+                                <span>Foto 4</span>
+                            </div>
+                        </div>
+                        
+                        <div class="panzoom-container">
+                            <div class="panzoom-image-wrapper">
+                                <img id="main-map-image" src="../assets/imagens/maquete_1.jpg" alt="Maquete">
+                            </div>
+                            <div class="panzoom-controls">
+                                <button id="zoom-in" title="Aumentar zoom">+</button>
+                                <button id="zoom-out" title="Diminuir zoom">−</button>
+                                <button id="zoom-reset" title="Resetar">⟲</button>
+                                <button id="prev-map" title="Anterior">◀</button>
+                                <button id="next-map" title="Próximo">▶</button>
+                            </div>
+                            <div class="panzoom-info">
+                                <span id="zoom-level">100%</span> | Use scroll para zoom, arraste para mover
+                            </div>
+                        </div>
                     </div>
                 </div>        
             </div>
         </section>
     </div>
     <script src="../js/scripts.js"></script>
+    <script>
+        // Visualizador Interativo de Mapas - Pan e Zoom
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageWrapper = document.querySelector('.panzoom-image-wrapper');
+            const mainImage = document.getElementById('main-map-image');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+            const thumbnails = document.querySelectorAll('.thumb');
+            let scale = 1, panning = false, pointX = 0, pointY = 0, startX = 0, startY = 0, currentMapIndex = 0;
+            const mapImages = ['../assets/imagens/maquete_1.jpg', '../assets/imagens/maquete_2.jpg', '../assets/imagens/maquete_3.jpg', '../assets/imagens/maquete_4.jpg'];
+            function updateTransform() { mainImage.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`; zoomLevelDisplay.textContent = Math.round(scale * 100) + '%'; }
+            function resetView() { scale = 1; pointX = 0; pointY = 0; updateTransform(); }
+            function loadMap(index) { currentMapIndex = index; mainImage.src = mapImages[index]; resetView(); thumbnails.forEach((thumb, i) => thumb.classList.toggle('active', i === index)); }
+            document.getElementById('zoom-in').addEventListener('click', () => { scale = Math.min(scale * 1.2, 5); updateTransform(); });
+            document.getElementById('zoom-out').addEventListener('click', () => { scale = Math.max(scale / 1.2, 0.5); if (scale < 1) { pointX = 0; pointY = 0; } updateTransform(); });
+            document.getElementById('zoom-reset').addEventListener('click', resetView);
+            document.getElementById('prev-map').addEventListener('click', () => loadMap((currentMapIndex - 1 + mapImages.length) % mapImages.length));
+            document.getElementById('next-map').addEventListener('click', () => loadMap((currentMapIndex + 1) % mapImages.length));
+            thumbnails.forEach((thumb, index) => thumb.addEventListener('click', () => loadMap(index)));
+            imageWrapper.addEventListener('mousedown', (e) => { e.preventDefault(); panning = true; startX = e.clientX - pointX; startY = e.clientY - pointY; imageWrapper.style.cursor = 'grabbing'; });
+            document.addEventListener('mousemove', (e) => { if (!panning) return; e.preventDefault(); pointX = e.clientX - startX; pointY = e.clientY - startY; updateTransform(); });
+            document.addEventListener('mouseup', () => { panning = false; imageWrapper.style.cursor = 'grab'; });
+            imageWrapper.addEventListener('wheel', (e) => { e.preventDefault(); scale = Math.min(Math.max(scale * (e.deltaY > 0 ? 0.9 : 1.1), 0.5), 5); updateTransform(); });
+        });
+    </script>
 </body>
 </html>
