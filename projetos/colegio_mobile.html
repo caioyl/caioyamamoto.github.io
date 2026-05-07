@@ -125,6 +125,206 @@
     .leaflet-popup-content {
       font-family: 'Rubik', sans-serif;
     }
+    
+    /* Controle de Estatísticas - Leaflet Custom Control */
+    .leaflet-control-stats {
+      background: rgba(245, 245, 241, 0.98);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      font-family: 'Rubik', sans-serif;
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
+      width: 300px;
+      margin-top: 50px !important;
+    }
+    
+    .leaflet-control-stats.hidden {
+      display: none !important;
+    }
+    
+    .stats-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: #193C6C;
+      color: white;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+    }
+    
+    .stats-header h3 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .stats-toggle-icon {
+      font-size: 12px;
+      transition: transform 0.3s;
+    }
+    
+    .stats-content {
+      padding: 14px 16px;
+    }
+    
+    .stat-item {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(25, 60, 108, 0.1);
+    }
+    
+    .stat-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    
+    .stat-label {
+      font-size: 10px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+    
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #193C6C;
+    }
+    
+    .stat-unit {
+      font-size: 11px;
+      color: #666;
+      font-weight: 400;
+    }
+    
+    .stat-bar {
+      height: 5px;
+      background: rgba(25, 60, 108, 0.1);
+      border-radius: 3px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    
+    .stat-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #50AF47, #0FFFF1);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    
+    .chart-container {
+      margin-top: 8px;
+      height: 70px;
+    }
+    
+    /* Botão flutuante para mostrar estatísticas */
+    .leaflet-control-stats-toggle {
+      width: 44px;
+      height: 44px;
+      background: #193C6C;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      font-size: 16px;
+      margin-top: 50px !important;
+    }
+    
+    .leaflet-control-stats-toggle:hover {
+      background: #2a4d7d;
+    }
+    
+    /* Legenda do Choropleth - como controle Leaflet */
+    .leaflet-control-choropleth-legend {
+      background: rgba(245, 245, 241, 0.95);
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      font-family: 'Rubik', sans-serif;
+      clear: none !important;
+    }
+    
+    .leaflet-control-choropleth-legend h4 {
+      margin: 0 0 8px 0;
+      font-size: 12px;
+      color: #193C6C;
+    }
+    
+    .legend-gradient {
+      height: 12px;
+      width: 150px;
+      background: linear-gradient(90deg, #313695, #4575B4, #74ADD1, #ABD9E9, #E0F3F8, #FEE090, #FDAE61, #F46D43, #D73027, #A50026);
+      border-radius: 2px;
+      margin-bottom: 4px;
+    }
+    
+    .legend-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #666;
+    }
+
+    /* Controle de modo do Choropleth - como controle Leaflet */
+    .leaflet-control-choropleth-mode {
+      background: rgba(245, 245, 241, 0.95);
+      padding: 10px 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      font-family: 'Rubik', sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      clear: none !important;
+    }
+
+    .leaflet-control-choropleth-mode label {
+      font-size: 11px;
+      color: #193C6C;
+      font-weight: 500;
+    }
+
+    .leaflet-control-choropleth-mode select {
+      font-size: 11px;
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: white;
+      color: #333;
+      cursor: pointer;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    .leaflet-control-choropleth-mode select:hover {
+      border-color: #193C6C;
+    }
+
+    .leaflet-control-choropleth-mode select:focus {
+      outline: none;
+      border-color: #193C6C;
+      box-shadow: 0 0 0 2px rgba(25, 60, 108, 0.2);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .leaflet-control-stats {
+        width: auto;
+        max-width: calc(100% - 20px);
+      }
+      
+      .leaflet-control-choropleth-legend {
+        max-width: calc(100% - 20px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -140,34 +340,41 @@
     Voltar para o Colégio
   </button>
   <div id="map"></div>
+  
+  
+  
   <footer>
     Desenvolvido por Caio Yamamoto
   </footer>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const map = L.map('map').setView([-23.5985457415217, -46.66920089296921], 14);
 
-    const googleMapsRoadmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: ' OpenStreetMap contributors',
-      subdomains: ['a', 'b', 'c']
+    const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+    });
+
+    const cartoDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
     });
 
     const googleMapsSatellite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
       attribution: ' Google Satellite'
     });
 
-    const googleMapsHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-      attribution: ' Google Satellite com Rótulos'
-    });
-
-    googleMapsRoadmap.addTo(map);
+    cartoPositron.addTo(map);
 
     const baseLayers = {
-      "OpenStreetMap (Mapa)": googleMapsRoadmap,
-      "Google Maps (Satélite)": googleMapsSatellite,
-      "Google Maps (Híbrido)": googleMapsHybrid
+      "Carto (Positron)": cartoPositron,
+      "Carto (Dark)": cartoDark,
+      "Google Maps (Satélite)": googleMapsSatellite
     };
 
     const vectorLayers = {};
@@ -272,10 +479,87 @@
       position: 'bottomleft'
     }).addTo(map);
 
+    // Criar controle Leaflet customizado para o modo de classificação
+    const ChoroplethModeControl = L.Control.extend({
+      options: {
+        position: 'topleft'
+      },
+      onAdd: function(map) {
+        const container = L.DomUtil.create('div', 'leaflet-control-choropleth-mode leaflet-bar');
+        container.innerHTML = `
+          <label>Classificar por:</label>
+          <select id="choropleth-mode" onchange="setChoroplethMode(this.value)">
+            <option value="densidade">Densidade Demográfica</option>
+            <option value="renda">Renda Média</option>
+            <option value="nenhum">Nenhum</option>
+          </select>
+        `;
+        L.DomEvent.disableClickPropagation(container);
+        return container;
+      }
+    });
+
+    // Criar controle Leaflet customizado para a legenda
+    const ChoroplethLegendControl = L.Control.extend({
+      options: {
+        position: 'topleft'
+      },
+      onAdd: function(map) {
+        const container = L.DomUtil.create('div', 'leaflet-control-choropleth-legend leaflet-bar');
+        container.innerHTML = `
+          <h4 id="legend-title">Densidade Demográfica</h4>
+          <div id="legend-gradient" class="legend-gradient"></div>
+          <div id="legend-labels" class="legend-labels">
+            <span>Baixa</span>
+            <span>Alta</span>
+          </div>
+        `;
+        L.DomEvent.disableClickPropagation(container);
+        return container;
+      }
+    });
+
+    // Controles de Estatísticas - Leaflet Custom
+    const StatsControl = L.Control.extend({
+      options: { position: 'topright' },
+      onAdd: function(map) {
+        const div = L.DomUtil.create('div', 'leaflet-control-stats leaflet-bar');
+        div.innerHTML = '<div class="stats-header" onclick="toggleStats()"><h3><i class="fas fa-chart-bar"></i> Dados Demográficos</h3><span class="stats-toggle-icon"><i class="fas fa-chevron-down"></i></span></div><div class="stats-content" id="stats-content"><div class="stat-item"><div class="stat-label">Setores</div><div class="stat-value" id="stat-setores">0</div></div><div class="stat-item"><div class="stat-label">População</div><div class="stat-value" id="stat-populacao">0 <span class="stat-unit">hab</span></div></div><div class="stat-item"><div class="stat-label">Densidade</div><div class="stat-value" id="stat-densidade">0 <span class="stat-unit">hab/km²</span></div><div class="stat-bar"><div class="stat-bar-fill" id="bar-densidade" style="width:0%"></div></div></div><div class="stat-item"><div class="stat-label">Renda Média</div><div class="stat-value" id="stat-renda">R$ 0</div><div class="stat-bar"><div class="stat-bar-fill" id="bar-renda" style="width:0%"></div></div></div><div class="stat-item"><div class="stat-label">Escolaridade</div><div class="chart-container"><canvas id="chart-escolaridade"></canvas></div></div><div class="stat-item"><div class="stat-label">Faixa Etária</div><div class="chart-container"><canvas id="chart-idade"></canvas></div></div><div class="stat-item"><div class="stat-label">Cor/Raça</div><div class="chart-container"><canvas id="chart-raca"></canvas></div></div></div>';
+        L.DomEvent.disableClickPropagation(div);
+        return div;
+      }
+    });
+
+    const StatsToggle = L.Control.extend({
+      options: { position: 'topright' },
+      onAdd: function(map) {
+        const btn = L.DomUtil.create('button', 'leaflet-control-stats-toggle leaflet-bar');
+        btn.innerHTML = '<i class="fas fa-chart-bar"></i>';
+        btn.onclick = toggleStats;
+        L.DomEvent.disableClickPropagation(btn);
+        return btn;
+      }
+    });
+
+    let statsPanel, statsBtn, isStatsOpen = true;
+    function toggleStats() {
+      const content = document.getElementById('stats-content');
+      const icon = document.querySelector('.stats-toggle-icon i');
+      if (!content || !icon) return;
+      isStatsOpen = !isStatsOpen;
+      content.style.display = isStatsOpen ? 'block' : 'none';
+      icon.className = isStatsOpen ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+      if (statsBtn) statsBtn.getContainer().style.display = isStatsOpen ? 'none' : 'flex';
+    }
+
     // Adicionar botões de centralizar após o controle de camadas ser criado
     setTimeout(function() {
       const controlContainer = document.querySelector('.leaflet-control-layers');
       if (controlContainer) {
+        // Adicionar controles do choropleth ao mapa
+        const modeControl = new ChoroplethModeControl().addTo(map);
+        const legendControl = new ChoroplethLegendControl().addTo(map);
+
         // Adicionar botões para cada localização
         locations.forEach(location => {
           const marker = vectorLayers[location.name];
@@ -401,10 +685,535 @@
       }, 500); // Ajuste o tempo de atraso conforme necessário (500ms neste exemplo)
     });
 
+    // Adicionar controles de estatísticas (após o geocoder para ficar embaixo)
+    statsPanel = new StatsControl().addTo(map);
+    statsBtn = new StatsToggle().addTo(map);
+    statsBtn.getContainer().style.display = 'none';
+
     document.getElementById('btn-colegio').addEventListener('click', function () {
       const colegioCoords = [-23.5985457415217, -46.66920089296921];
       map.setView(colegioCoords, 16);
       colegio.openPopup();
+    });
+
+    // ============================================================
+    // CÓDIGO DO MAPA DE DENSIDADE DEMOGRÁFICA
+    // ============================================================
+
+    let censusLayer = null;
+    let censusData = null;
+    let charts = {};
+
+    // Modo atual do choropleth
+    let choroplethMode = 'densidade'; // 'densidade' ou 'renda'
+
+    // Cores para o choropleth - Densidade
+    function getDensityColor(density) {
+      const colors = [
+        '#313695', // < 1000
+        '#4575B4', // 1000-2500
+        '#74ADD1', // 2500-5000
+        '#ABD9E9', // 5000-7500
+        '#E0F3F8', // 7500-10000
+        '#FEE090', // 10000-15000
+        '#FDAE61', // 15000-20000
+        '#F46D43', // 20000-30000
+        '#D73027', // 30000-50000
+        '#A50026'  // > 50000
+      ];
+
+      if (density < 1000) return colors[0];
+      if (density < 2500) return colors[1];
+      if (density < 5000) return colors[2];
+      if (density < 7500) return colors[3];
+      if (density < 10000) return colors[4];
+      if (density < 15000) return colors[5];
+      if (density < 20000) return colors[6];
+      if (density < 30000) return colors[7];
+      if (density < 50000) return colors[8];
+      return colors[9];
+    }
+
+    // Cores para o choropleth - Renda
+    function getRendaColor(renda) {
+      // Escala de cor: vermelho (baixa) -> amarelo -> verde (alta)
+      const colors = [
+        '#A50026', // < 500
+        '#D73027', // 500-1000
+        '#F46D43', // 1000-1500
+        '#FDAE61', // 1500-2000
+        '#FEE090', // 2000-3000
+        '#E0F3F8', // 3000-5000
+        '#ABD9E9', // 5000-7000
+        '#74ADD1', // 7000-10000
+        '#4575B4', // 10000-15000
+        '#313695'  // > 15000
+      ];
+
+      if (renda < 500) return colors[0];
+      if (renda < 1000) return colors[1];
+      if (renda < 1500) return colors[2];
+      if (renda < 2000) return colors[3];
+      if (renda < 3000) return colors[4];
+      if (renda < 5000) return colors[5];
+      if (renda < 7000) return colors[6];
+      if (renda < 10000) return colors[7];
+      if (renda < 15000) return colors[8];
+      return colors[9];
+    }
+
+    // Função para obter cor baseada no modo atual
+    function getChoroplethColor(feature) {
+      const p = feature.properties;
+      if (choroplethMode === 'densidade') {
+        return getDensityColor(p.DENSIDADE || 0);
+      } else if (choroplethMode === 'renda') {
+        return getRendaColor(p.RENDA_MEDIA_2010 || p.RENDA_MEDIA || 0);
+      } else {
+        // Modo 'nenhum' - cor neutra (cinza claro)
+        return '#CCCCCC';
+      }
+    }
+
+    // Alterar modo do choropleth
+    function setChoroplethMode(mode) {
+      choroplethMode = mode;
+
+      // Atualizar legenda
+      const title = document.getElementById('legend-title');
+      const labels = document.getElementById('legend-labels');
+      const gradient = document.getElementById('legend-gradient');
+      const legendContainer = document.querySelector('.leaflet-control-choropleth-legend');
+
+      if (mode === 'densidade') {
+        title.textContent = 'Densidade Demográfica';
+        labels.innerHTML = '<span>Baixa</span><span>Alta</span>';
+        gradient.style.background = 'linear-gradient(to right, #313695, #4575B4, #74ADD1, #ABD9E9, #E0F3F8, #FEE090, #FDAE61, #F46D43, #D73027, #A50026)';
+        legendContainer.style.display = 'block';
+      } else if (mode === 'renda') {
+        title.textContent = 'Renda Média (R$)';
+        labels.innerHTML = '<span>Baixa</span><span>Alta</span>';
+        gradient.style.background = 'linear-gradient(to right, #A50026, #D73027, #F46D43, #FDAE61, #FEE090, #E0F3F8, #ABD9E9, #74ADD1, #4575B4, #313695)';
+        legendContainer.style.display = 'block';
+      } else {
+        // Modo 'nenhum' - esconder legenda
+        legendContainer.style.display = 'none';
+      }
+
+      // Atualizar layer se existir
+      if (censusLayer) {
+        censusLayer.setStyle(function(feature) {
+          return {
+            fillColor: getChoroplethColor(feature),
+            weight: 0,
+            opacity: 0,
+            fillOpacity: mode === 'nenhum' ? 0.3 : 0.7
+          };
+        });
+      }
+    }
+
+    // Carregar dados censitários
+    async function loadCensusData() {
+      console.log('Carregando dados censitários...');
+      try {
+        const response = await fetch('../assets/data/setores_sp_com_renda_2010.geojson');
+        if (!response.ok) {
+          console.warn('Arquivo de dados não encontrado. Criando dados de exemplo...');
+          createSampleData();
+          return;
+        }
+
+        censusData = await response.json();
+        console.log(`Carregados ${censusData.features.length} setores censitários`);
+
+        // Criar camada choropleth
+        createChoroplethLayer();
+
+        // Calcular estatísticas iniciais
+        updateStatistics();
+
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+        createSampleData();
+      }
+    }
+
+    // Criar dados de exemplo se o arquivo não existir
+    function createSampleData() {
+      console.log('Criando dados de exemplo...');
+
+      const center = map.getCenter();
+      const features = [];
+
+      // Criar grid de setores ao redor do centro
+      for (let i = -8; i <= 8; i++) {
+        for (let j = -8; j <= 8; j++) {
+          const lat = center.lat + i * 0.002;
+          const lng = center.lng + j * 0.002;
+
+          // Densidade variável baseada na distância do centro
+          const dist = Math.sqrt(i*i + j*j);
+          const densidade = Math.max(1000, 20000 - dist * 2000 + Math.random() * 5000);
+          const area = 0.004;
+          const populacao = Math.floor(densidade * area);
+
+          features.push({
+            type: 'Feature',
+            properties: {
+              CD_SETOR: `SAMPLE_${i}_${j}`,
+              POPULACAO: populacao,
+              AREA_KM2: area,
+              DENSIDADE: densidade,
+              RENDA_MEDIA: 2000 + Math.random() * 4000,
+              ANALFABETO: 2 + Math.random() * 5,
+              FUNDAMENTAL: 25 + Math.random() * 15,
+              MEDIO: 35 + Math.random() * 15,
+              SUPERIOR: 15 + Math.random() * 20,
+              IDADE_0_14: 18 + Math.random() * 5,
+              IDADE_15_59: 65 + Math.random() * 5,
+              IDADE_60_PLUS: 12 + Math.random() * 5,
+              BRANCA: 55 + Math.random() * 20,
+              PARDA: 20 + Math.random() * 10,
+              PRETA: 8 + Math.random() * 5,
+              AMARELA: 2 + Math.random() * 2,
+              INDIGENA: 0.3 + Math.random() * 0.5
+            },
+            geometry: {
+              type: 'Polygon',
+              coordinates: [[
+                [lng, lat],
+                [lng + 0.002, lat],
+                [lng + 0.002, lat + 0.002],
+                [lng, lat + 0.002],
+                [lng, lat]
+              ]]
+            }
+          });
+        }
+      }
+
+      censusData = { type: 'FeatureCollection', features: features };
+      createChoroplethLayer();
+      updateStatistics();
+    }
+
+    // Criar camada choropleth
+    function createChoroplethLayer() {
+      if (censusLayer) {
+        map.removeLayer(censusLayer);
+      }
+
+      censusLayer = L.geoJSON(censusData, {
+        style: function(feature) {
+          return {
+            fillColor: getChoroplethColor(feature),
+            weight: 0,
+            opacity: 0,
+            fillOpacity: 0.7
+          };
+        },
+        onEachFeature: function(feature, layer) {
+          const p = feature.properties;
+          const areaFormatted = (p.AREA_KM2 || 0).toFixed(3).replace('.', ',');
+          const renda = p.RENDA_MEDIA_2010 || p.RENDA_MEDIA || 0;
+          const codSetor = p.CD_GEOCODI || p.CD_SETOR || 'N/A';
+          const distrito = p.NM_DISTRIT || 'N/A';
+          layer.bindPopup(`
+            <b>Setor:</b> ${codSetor}<br>
+            <b>Distrito:</b> ${distrito}<br>
+            <b>Área:</b> ${areaFormatted} km²<br>
+            <b>População:</b> ${p.POPULACAO?.toLocaleString() || 'N/A'}<br>
+            <b>Densidade:</b> ${Math.round(p.DENSIDADE || 0).toLocaleString()} hab/km²<br>
+            <b>Renda média (2010):</b> R$ ${renda.toFixed(2).replace('.', ',')}
+          `);
+        }
+      }).addTo(map);
+
+      // Mover para trás dos outros layers
+      censusLayer.bringToBack();
+    }
+
+    // Calcular estatísticas dos setores dentro do quadrado
+    function calculateSquareStats() {
+      if (!censusData || !censusData.features) {
+        console.log('Dados censitários não disponíveis');
+        return null;
+      }
+
+      const center = map.getCenter();
+      
+      // Usar as mesmas coordenadas do quadrado visual (1km = 1000m)
+      const side = 1000;
+      const halfSide = side / 2;
+      const latDelta = halfSide / 111320;
+      const lngDelta = halfSide / (111320 * Math.cos((center.lat * Math.PI) / 180));
+      
+      // Criar polígono do quadrado 1km² (mesma lógica do createSquare)
+      const squareCoords = [
+        [center.lng - lngDelta, center.lat - latDelta], // SW
+        [center.lng + lngDelta, center.lat - latDelta], // SE
+        [center.lng + lngDelta, center.lat + latDelta], // NE
+        [center.lng - lngDelta, center.lat + latDelta], // NW
+        [center.lng - lngDelta, center.lat - latDelta]  // SW (fechar)
+      ];
+      
+      const squarePolygon = turf.polygon([squareCoords]);
+      
+      console.log('Centro do mapa:', center.lat, center.lng);
+      console.log('Total de setores:', censusData.features.length);
+
+      const intersectingSectors = [];
+      let totalPop = 0;
+      let totalArea = 0;
+      let weightedRenda = 0;
+
+      // Escolaridade
+      let escolaridade = { ANALFABETO: 0, FUNDAMENTAL: 0, MEDIO: 0, SUPERIOR: 0 };
+
+      // Idade
+      let idade = { '0-14': 0, '15-59': 0, '60+': 0 };
+
+      // Raça
+      let raca = { BRANCA: 0, PARDA: 0, PRETA: 0, AMARELA: 0, INDIGENA: 0 };
+
+      // Filtrar apenas setores próximos (otimização)
+      const nearbyFeatures = censusData.features.filter(feature => {
+        try {
+          const centroid = turf.centroid(feature);
+          const dist = turf.distance(centroid, turf.point([center.lng, center.lat]), { units: 'kilometers' });
+          return dist < 2; // Setores dentro de 2km do centro
+        } catch (e) {
+          return false;
+        }
+      });
+
+      console.log('Setores próximos (raio 2km):', nearbyFeatures.length);
+
+      nearbyFeatures.forEach(feature => {
+        try {
+          // Verificar se o centro do setor está dentro do quadrado
+          const centroid = turf.centroid(feature);
+          const isInside = turf.booleanPointInPolygon(centroid, squarePolygon);
+          
+          if (isInside) {
+            intersectingSectors.push(feature);
+            const p = feature.properties;
+            const pop = p.POPULACAO || 0;
+
+            totalPop += pop;
+            totalArea += p.AREA_KM2 || 0;
+            const renda = p.RENDA_MEDIA_2010 || p.RENDA_MEDIA || 0;
+            weightedRenda += renda * pop;
+
+            // Escolaridade (ponderada)
+            escolaridade.ANALFABETO += (p.ANALFABETO || 0) * pop;
+            escolaridade.FUNDAMENTAL += (p.FUNDAMENTAL || 0) * pop;
+            escolaridade.MEDIO += (p.MEDIO || 0) * pop;
+            escolaridade.SUPERIOR += (p.SUPERIOR || 0) * pop;
+
+            // Idade
+            idade['0-14'] += (p.IDADE_0_14 || 0) * pop;
+            idade['15-59'] += (p.IDADE_15_59 || 0) * pop;
+            idade['60+'] += (p.IDADE_60_PLUS || 0) * pop;
+
+            // Raça
+            raca.BRANCA += (p.BRANCA || 0) * pop;
+            raca.PARDA += (p.PARDA || 0) * pop;
+            raca.PRETA += (p.PRETA || 0) * pop;
+            raca.AMARELA += (p.AMARELA || 0) * pop;
+            raca.INDIGENA += (p.INDIGENA || 0) * pop;
+          }
+        } catch (e) {
+          // Ignorar erros de geometria
+        }
+      });
+
+      console.log('Setores dentro do quadrado:', intersectingSectors.length);
+      console.log('População total:', totalPop);
+
+      // Normalizar percentuais
+      if (totalPop > 0) {
+        Object.keys(escolaridade).forEach(k => escolaridade[k] /= totalPop);
+        Object.keys(idade).forEach(k => idade[k] /= totalPop);
+        Object.keys(raca).forEach(k => raca[k] /= totalPop);
+      }
+
+      return {
+        setores: intersectingSectors.length,
+        populacao: totalPop,
+        area: totalArea || 1,
+        densidade: totalPop / (totalArea || 1),
+        rendaMedia: totalPop > 0 ? weightedRenda / totalPop : 0,
+        escolaridade,
+        idade,
+        raca
+      };
+    }
+
+    // Atualizar estatísticas no painel
+    function updateStatistics() {
+      const stats = calculateSquareStats();
+      if (!stats) return;
+
+      // Atualizar valores numéricos
+      document.getElementById('stat-setores').textContent = stats.setores;
+      document.getElementById('stat-populacao').innerHTML = 
+        `${stats.populacao.toLocaleString()} <span class="stat-unit">hab</span>`;
+      document.getElementById('stat-densidade').innerHTML = 
+        `${Math.round(stats.densidade).toLocaleString()} <span class="stat-unit">hab/km²</span>`;
+      document.getElementById('stat-renda').textContent = 
+        `R$ ${stats.rendaMedia.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+      // Barra de densidade (máx 50000 hab/km²)
+      const densPercent = Math.min((stats.densidade / 50000) * 100, 100);
+      document.getElementById('bar-densidade').style.width = `${densPercent}%`;
+
+      // Barra de renda (máx R$ 20.000)
+      const rendaPercent = Math.min((stats.rendaMedia / 20000) * 100, 100);
+      document.getElementById('bar-renda').style.width = `${rendaPercent}%`;
+
+      // Atualizar gráficos
+      updateCharts(stats);
+    }
+
+    // Inicializar gráficos
+    function initCharts() {
+      const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: { display: false },
+          y: { display: false }
+        }
+      };
+
+      // Gráfico de escolaridade
+      charts.escolaridade = new Chart(document.getElementById('chart-escolaridade'), {
+        type: 'bar',
+        data: {
+          labels: ['Analfabeto', 'Fundamental', 'Médio', 'Superior'],
+          datasets: [{
+            data: [0, 0, 0, 0],
+            backgroundColor: ['#D73027', '#FDAE61', '#FEE090', '#50AF47'],
+            borderRadius: 4
+          }]
+        },
+        options: {
+          ...commonOptions,
+          plugins: {
+            ...commonOptions.plugins,
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.raw.toFixed(1)}%`
+              }
+            }
+          }
+        }
+      });
+
+      // Gráfico de idade
+      charts.idade = new Chart(document.getElementById('chart-idade'), {
+        type: 'doughnut',
+        data: {
+          labels: ['0-14 anos', '15-59 anos', '60+ anos'],
+          datasets: [{
+            data: [0, 0, 0],
+            backgroundColor: ['#74ADD1', '#4575B4', '#313695'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '60%',
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: { boxWidth: 10, font: { size: 10 } }
+            }
+          }
+        }
+      });
+
+      // Gráfico de raça
+      charts.raca = new Chart(document.getElementById('chart-raca'), {
+        type: 'pie',
+        data: {
+          labels: ['Branca', 'Parda', 'Preta', 'Amarela', 'Indígena'],
+          datasets: [{
+            data: [0, 0, 0, 0, 0],
+            backgroundColor: ['#E0F3F8', '#ABD9E9', '#74ADD1', '#4575B4', '#313695'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: { boxWidth: 10, font: { size: 9 } }
+            }
+          }
+        }
+      });
+    }
+
+    // Atualizar gráficos com novos dados
+    function updateCharts(stats) {
+      if (!charts.escolaridade) return;
+
+      // Escolaridade
+      charts.escolaridade.data.datasets[0].data = [
+        stats.escolaridade.ANALFABETO,
+        stats.escolaridade.FUNDAMENTAL,
+        stats.escolaridade.MEDIO,
+        stats.escolaridade.SUPERIOR
+      ];
+      charts.escolaridade.update();
+
+      // Idade
+      charts.idade.data.datasets[0].data = [
+        stats.idade['0-14'],
+        stats.idade['15-59'],
+        stats.idade['60+']
+      ];
+      charts.idade.update();
+
+      // Raça
+      charts.raca.data.datasets[0].data = [
+        stats.raca.BRANCA,
+        stats.raca.PARDA,
+        stats.raca.PRETA,
+        stats.raca.AMARELA,
+        stats.raca.INDIGENA
+      ];
+      charts.raca.update();
+    }
+
+    // Variáveis e função de toggle já definidas no início
+
+    // Modificar o evento de movimento do mapa para atualizar estatísticas
+    map.on('move', function () {
+      map.removeLayer(square);
+      square = createSquare(map.getCenter());
+
+      // Atualizar estatísticas com debounce
+      clearTimeout(window.statsTimeout);
+      window.statsTimeout = setTimeout(updateStatistics, 100);
+    });
+
+    // Inicializar quando o mapa estiver pronto
+    map.whenReady(function() {
+      // Inicializar gráficos
+      initCharts();
+
+      // Carregar dados censitários
+      loadCensusData();
     });
   </script>
 </body>
