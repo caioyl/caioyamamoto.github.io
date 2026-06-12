@@ -38,9 +38,32 @@
                         <p>Mapa anexo ao relatório "Perfil topoclimático da Serra do Mar: a trilha Caminhos do Mar como estudo de caso" da disciplina de Climatologia I ministrada pelo professor Emerson Galvani do Departamento de Geografia da USP.
                         </p>
                     </div>
-                    <div class="image-project">
-                        <img src="../assets/imagens/capa_clima.jpg" style="width:100%" alt="Foto 1">
-                        <img src="../assets/imagens/trilha_clima.png" style="width:100%" alt="Foto 2">
+                    <div class="map-viewer-container">
+                        <div class="map-thumbnails">
+                            <div class="thumb active" data-index="0" data-src="../assets/imagens/capa_clima.jpg">
+                                <img src="../assets/imagens/capa_clima.jpg" alt="Capa">
+                                <span>Mapa geral</span>
+                            </div>
+                            <div class="thumb" data-index="1" data-src="../assets/imagens/trilha_clima.png">
+                                <img src="../assets/imagens/trilha_clima.png" alt="Trilha">
+                                <span>Trilha</span>
+                            </div>
+                        </div>
+                        <div class="panzoom-container">
+                            <div class="panzoom-image-wrapper">
+                                <img id="main-map-image" src="../assets/imagens/capa_clima.jpg" alt="Mapa">
+                            </div>
+                            <div class="panzoom-controls">
+                                <button id="zoom-in" title="Aumentar zoom">+</button>
+                                <button id="zoom-out" title="Diminuir zoom">−</button>
+                                <button id="zoom-reset" title="Resetar">⟲</button>
+                                <button id="prev-map" title="Anterior">←</button>
+                                <button id="next-map" title="Próximo">→</button>
+                            </div>
+                            <div class="panzoom-info">
+                                <span id="zoom-level">100%</span> | Use scroll para zoom, arraste para mover
+                            </div>
+                        </div>
                     </div>
                 </div>         
             </div>

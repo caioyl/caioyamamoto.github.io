@@ -70,6 +70,18 @@ function initializeImageSlideshow() {
 }
 
 function startSlideshow(imgElement, images, interval, zoomCountsArray, zoomDuration) {
+    // Troca direta sem canvas e sem transição
+    if (imgElement.getAttribute('data-transition') === 'none') {
+        let currentIndex = 0;
+        function next() {
+            currentIndex = (currentIndex + 1) % images.length;
+            imgElement.src = images[currentIndex];
+            setTimeout(next, interval);
+        }
+        setTimeout(next, interval);
+        return;
+    }
+
     let currentIndex = 0;
     
     // Cria uma segunda imagem para transições suaves

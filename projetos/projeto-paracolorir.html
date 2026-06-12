@@ -37,9 +37,32 @@
                     <div class="text-project">
                         <p>Mapas produzidos por encomenda para professores da área de Geografia do Colégio Rainha da Paz.</p>
                     </div>
-                    <div class="image-project">
-                        <img class="img-hero" src="../assets/imagens/MAPA AMÉRICA DO SUL.jpg" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/ENSINO MÉDIO _ AMÉRICA CENTRAL.jpg" alt="Foto 1">
+                    <div class="map-viewer-container">
+                        <div class="map-thumbnails">
+                            <div class="thumb active" data-index="0" data-src="../assets/imagens/MAPA AMÉRICA DO SUL.jpg">
+                                <img src="../assets/imagens/MAPA AMÉRICA DO SUL.jpg" alt="América do Sul">
+                                <span>América do Sul</span>
+                            </div>
+                            <div class="thumb" data-index="1" data-src="../assets/imagens/ENSINO MÉDIO _ AMÉRICA CENTRAL.jpg">
+                                <img src="../assets/imagens/ENSINO MÉDIO _ AMÉRICA CENTRAL.jpg" alt="América Central">
+                                <span>América Central</span>
+                            </div>
+                        </div>
+                        <div class="panzoom-container">
+                            <div class="panzoom-image-wrapper">
+                                <img id="main-map-image" src="../assets/imagens/MAPA AMÉRICA DO SUL.jpg" alt="Mapa">
+                            </div>
+                            <div class="panzoom-controls">
+                                <button id="zoom-in" title="Aumentar zoom">+</button>
+                                <button id="zoom-out" title="Diminuir zoom">−</button>
+                                <button id="zoom-reset" title="Resetar">⟲</button>
+                                <button id="prev-map" title="Anterior">←</button>
+                                <button id="next-map" title="Próximo">→</button>
+                            </div>
+                            <div class="panzoom-info">
+                                <span id="zoom-level">100%</span> | Use scroll para zoom, arraste para mover
+                            </div>
+                        </div>
                     </div>
                 </div>        
             </div>

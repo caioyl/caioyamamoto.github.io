@@ -37,9 +37,32 @@
                     <div class="text-project">
                         <p>Mapa feito para o trabalho de campo à Extrema promovido pelo Colégio Rainha da Paz</p>
                     </div>
-                    <div class="image-project">
-                        <img class="img-hero" src="../assets/imagens/extrema_com.jpg" alt="Foto 1">
-                        <img class="img-hero" src="../assets/imagens/extrema_sem.jpg" alt="Foto 1">
+                    <div class="map-viewer-container">
+                        <div class="map-thumbnails">
+                            <div class="thumb active" data-index="0" data-src="../assets/imagens/extrema_com.jpg">
+                                <img src="../assets/imagens/extrema_com.jpg" alt="Com relevo">
+                                <span>Com relevo</span>
+                            </div>
+                            <div class="thumb" data-index="1" data-src="../assets/imagens/extrema_sem.jpg">
+                                <img src="../assets/imagens/extrema_sem.jpg" alt="Sem relevo">
+                                <span>Sem relevo</span>
+                            </div>
+                        </div>
+                        <div class="panzoom-container">
+                            <div class="panzoom-image-wrapper">
+                                <img id="main-map-image" src="../assets/imagens/extrema_com.jpg" alt="Mapa">
+                            </div>
+                            <div class="panzoom-controls">
+                                <button id="zoom-in" title="Aumentar zoom">+</button>
+                                <button id="zoom-out" title="Diminuir zoom">−</button>
+                                <button id="zoom-reset" title="Resetar">⟲</button>
+                                <button id="prev-map" title="Anterior">←</button>
+                                <button id="next-map" title="Próximo">→</button>
+                            </div>
+                            <div class="panzoom-info">
+                                <span id="zoom-level">100%</span> | Use scroll para zoom, arraste para mover
+                            </div>
+                        </div>
                     </div>
                 </div>        
             </div>
