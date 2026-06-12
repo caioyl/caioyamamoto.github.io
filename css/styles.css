@@ -331,6 +331,7 @@ section {
     height: 0;
     padding-bottom: 70.7%; /* Proporção 3507x2480 = 70.7% (2480/3507) */
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .project-overlay {
@@ -823,6 +824,8 @@ footer p {
     height: 60px;
     object-fit: cover;
     display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
 }
 
 .map-thumbnails .thumb span {
@@ -830,6 +833,7 @@ footer p {
     text-align: center;
     font-size: 12px;
     padding: 5px;
+    pointer-events: none;
     background: #333;
     color: white;
 }

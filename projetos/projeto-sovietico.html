@@ -61,6 +61,7 @@
                                 <button id="zoom-out" title="Diminuir zoom">−</button>
                                 <button id="zoom-reset" title="Resetar">⟲</button>
                                 <button id="prev-map" title="Anterior">←</button>
+                                <button id="play-map" title="Reproduzir">▶</button>
                                 <button id="next-map" title="Próximo">→</button>
                             </div>
                             <div class="panzoom-info">
@@ -88,9 +89,14 @@
             document.getElementById('zoom-in').addEventListener('click', () => { scale = Math.min(scale * 1.2, 5); updateTransform(); });
             document.getElementById('zoom-out').addEventListener('click', () => { scale = Math.max(scale / 1.2, 0.5); if (scale < 1) { pointX = 0; pointY = 0; } updateTransform(); });
             document.getElementById('zoom-reset').addEventListener('click', resetView);
-            document.getElementById('prev-map').addEventListener('click', () => loadMap((currentMapIndex - 1 + mapImages.length) % mapImages.length));
-            document.getElementById('next-map').addEventListener('click', () => loadMap((currentMapIndex + 1) % mapImages.length));
+            document.getElementById('prev-map').addEventListener('click', () => { stopAutoPlay(); loadMap((currentMapIndex - 1 + mapImages.length) % mapImages.length); });
+            document.getElementById('next-map').addEventListener('click', () => { stopAutoPlay(); loadMap((currentMapIndex + 1) % mapImages.length); });
             thumbnails.forEach((thumb, index) => thumb.addEventListener('click', () => loadMap(index)));
+            const playBtn = document.getElementById('play-map');
+            let autoPlayInterval = null;
+            function startAutoPlay() { autoPlayInterval = setInterval(() => loadMap((currentMapIndex + 1) % mapImages.length), 2500); playBtn.textContent = '⏸'; playBtn.title = 'Pausar'; }
+            function stopAutoPlay() { clearInterval(autoPlayInterval); autoPlayInterval = null; playBtn.textContent = '▶'; playBtn.title = 'Reproduzir'; }
+            playBtn.addEventListener('click', () => { if (autoPlayInterval) { stopAutoPlay(); } else { startAutoPlay(); } });
             imageWrapper.addEventListener('mousedown', (e) => { e.preventDefault(); panning = true; startX = e.clientX - pointX; startY = e.clientY - pointY; imageWrapper.style.cursor = 'grabbing'; });
             document.addEventListener('mousemove', (e) => { if (!panning) return; e.preventDefault(); pointX = e.clientX - startX; pointY = e.clientY - startY; updateTransform(); });
             document.addEventListener('mouseup', () => { panning = false; imageWrapper.style.cursor = 'grab'; });
