@@ -83,7 +83,8 @@
                                 <button id="zoom-out" title="Diminuir zoom">−</button>
                                 <button id="zoom-reset" title="Resetar">⟲</button>
                                 <button id="prev-map" title="Anterior">◀</button>
-                                <button id="next-map" title="Próximo">▶</button>
+                                <button id="play-map" title="Reproduzir">▶</button>
+                                <button id="next-map" title="Próximo">⏭</button>
                             </div>
                             <div class="panzoom-info">
                                 <span id="zoom-level">100%</span> | Use scroll para zoom, arraste para mover
@@ -164,13 +165,40 @@
             
             // Navegação entre mapas
             document.getElementById('prev-map').addEventListener('click', function() {
-                const newIndex = (currentMapIndex - 1 + mapImages.length) % mapImages.length;
-                loadMap(newIndex);
+                stopAutoPlay();
+                loadMap((currentMapIndex - 1 + mapImages.length) % mapImages.length);
             });
-            
+
             document.getElementById('next-map').addEventListener('click', function() {
-                const newIndex = (currentMapIndex + 1) % mapImages.length;
-                loadMap(newIndex);
+                stopAutoPlay();
+                loadMap((currentMapIndex + 1) % mapImages.length);
+            });
+
+            // Play / Pause
+            const playBtn = document.getElementById('play-map');
+            let autoPlayInterval = null;
+
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(() => {
+                    loadMap((currentMapIndex + 1) % mapImages.length);
+                }, 2500);
+                playBtn.textContent = '⏸';
+                playBtn.title = 'Pausar';
+            }
+
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+                playBtn.textContent = '▶';
+                playBtn.title = 'Reproduzir';
+            }
+
+            playBtn.addEventListener('click', function() {
+                if (autoPlayInterval) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
             });
             
             // Thumbnails
