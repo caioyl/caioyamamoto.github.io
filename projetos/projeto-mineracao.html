@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caio Yamamoto • Portfólio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/mediaqueries.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X55DR6SDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1X55DR6SDZ');
+</script>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <script>
+            fetch('../header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+        </script>
+        <section id="project">
+            <div class="container">
+                <div class="header">
+                    <h2>Áreas de Mineração - Escola Móbile</h2>
+                    <hr>
+                </div>
+                <div class="content-project">
+                    <div class="text-project">
+                        <p>Imagens de satélite de grandes áreas de mineração ao redor do mundo, produzidas para projeto interdisciplinar da Escola Móbile.</p>
+                    </div>
+                    <div class="map-viewer-container">
+                        <div class="map-thumbnails">
+                            <div class="thumb active" data-index="0" data-src="../assets/imagens/Mina Escondida_1.jpg">
+                                <img src="../assets/imagens/Mina Escondida_1.jpg" alt="Escondida">
+                                <span>Escondida</span>
+                            </div>
+                            <div class="thumb" data-index="1" data-src="../assets/imagens/Mina Grasberg_1.jpg">
+                                <img src="../assets/imagens/Mina Grasberg_1.jpg" alt="Grasberg">
+                                <span>Grasberg</span>
+                            </div>
+                            <div class="thumb" data-index="2" data-src="../assets/imagens/Mina Kibali Gold_1.jpg">
+                                <img src="../assets/imagens/Mina Kibali Gold_1.jpg" alt="Kibali Gold">
+                                <span>Kibali Gold</span>
+                            </div>
+                            <div class="thumb" data-index="3" data-src="../assets/imagens/Mina Córrego do Feijão_1.jpg">
+                                <img src="../assets/imagens/Mina Córrego do Feijão_1.jpg" alt="Córrego do Feijão">
+                                <span>Córrego do Feijão</span>
+                            </div>
+                            <div class="thumb" data-index="4" data-src="../assets/imagens/Mina Olimpiada_1.jpg">
+                                <img src="../assets/imagens/Mina Olimpiada_1.jpg" alt="Olimpiada">
+                                <span>Olimpiada</span>
+                            </div>
+                            <div class="thumb" data-index="5" data-src="../assets/imagens/Mina Venetia Diamond_1.jpg">
+                                <img src="../assets/imagens/Mina Venetia Diamond_1.jpg" alt="Venetia Diamond">
+                                <span>Venetia Diamond</span>
+                            </div>
+                            <div class="thumb" data-index="6" data-src="../assets/imagens/Mina Super Pit_1.jpg">
+                                <img src="../assets/imagens/Mina Super Pit_1.jpg" alt="Super Pit">
+                                <span>Super Pit</span>
+                            </div>
+                            <div class="thumb" data-index="7" data-src="../assets/imagens/Mina Orapa Diamond_1.jpg">
+                                <img src="../assets/imagens/Mina Orapa Diamond_1.jpg" alt="Orapa Diamond">
+                                <span>Orapa Diamond</span>
+                            </div>
+                            <div class="thumb" data-index="8" data-src="../assets/imagens/Minas de Riotinto_1.jpg">
+                                <img src="../assets/imagens/Minas de Riotinto_1.jpg" alt="Rio Tinto">
+                                <span>Rio Tinto</span>
+                            </div>
+                            <div class="thumb" data-index="9" data-src="../assets/imagens/Serra dos Carajás_1.jpg">
+                                <img src="../assets/imagens/Serra dos Carajás_1.jpg" alt="Serra dos Carajás">
+                                <span>Serra dos Carajás</span>
+                            </div>
+                        </div>
+                        <div class="panzoom-container">
+                            <div class="panzoom-image-wrapper">
+                                <img id="main-map-image" src="../assets/imagens/Mina Escondida_1.jpg" alt="Mapa">
+                            </div>
+                            <div class="panzoom-controls">
+                                <button id="zoom-in" title="Aumentar zoom">+</button>
+                                <button id="zoom-out" title="Diminuir zoom">−</button>
+                                <button id="zoom-reset" title="Resetar">⟲</button>
+                                <button id="prev-map" title="Anterior">←</button>
+                                <button id="play-map" title="Reproduzir">▶</button>
+                                <button id="next-map" title="Próximo">→</button>
+                            </div>
+                            <div class="panzoom-info">
+                                <span id="zoom-level">100%</span> | Use scroll para zoom, arraste para mover
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="../js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageWrapper = document.querySelector('.panzoom-image-wrapper');
+            const mainImage = document.getElementById('main-map-image');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+            const thumbnails = document.querySelectorAll('.thumb');
+            let scale = 1, panning = false, pointX = 0, pointY = 0, startX = 0, startY = 0, currentMapIndex = 0;
+            const mapImages = [
+                '../assets/imagens/Mina Escondida_1.jpg',
+                '../assets/imagens/Mina Grasberg_1.jpg',
+                '../assets/imagens/Mina Kibali Gold_1.jpg',
+                '../assets/imagens/Mina Córrego do Feijão_1.jpg',
+                '../assets/imagens/Mina Olimpiada_1.jpg',
+                '../assets/imagens/Mina Venetia Diamond_1.jpg',
+                '../assets/imagens/Mina Super Pit_1.jpg',
+                '../assets/imagens/Mina Orapa Diamond_1.jpg',
+                '../assets/imagens/Minas de Riotinto_1.jpg',
+                '../assets/imagens/Serra dos Carajás_1.jpg'
+            ];
+            function updateTransform() { mainImage.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`; zoomLevelDisplay.textContent = Math.round(scale * 100) + '%'; }
+            function resetView() { scale = 1; pointX = 0; pointY = 0; updateTransform(); }
+            function loadMap(index) { currentMapIndex = index; mainImage.src = mapImages[index]; resetView(); thumbnails.forEach((thumb, i) => thumb.classList.toggle('active', i === index)); }
+            document.getElementById('zoom-in').addEventListener('click', () => { scale = Math.min(scale * 1.2, 5); updateTransform(); });
+            document.getElementById('zoom-out').addEventListener('click', () => { scale = Math.max(scale / 1.2, 0.5); if (scale < 1) { pointX = 0; pointY = 0; } updateTransform(); });
+            document.getElementById('zoom-reset').addEventListener('click', resetView);
+            document.getElementById('prev-map').addEventListener('click', () => { stopAutoPlay(); loadMap((currentMapIndex - 1 + mapImages.length) % mapImages.length); });
+            document.getElementById('next-map').addEventListener('click', () => { stopAutoPlay(); loadMap((currentMapIndex + 1) % mapImages.length); });
+            thumbnails.forEach((thumb, index) => thumb.addEventListener('click', () => loadMap(index)));
+            const playBtn = document.getElementById('play-map');
+            let autoPlayInterval = null;
+            function startAutoPlay() { autoPlayInterval = setInterval(() => loadMap((currentMapIndex + 1) % mapImages.length), 2500); playBtn.textContent = '⏸'; playBtn.title = 'Pausar'; }
+            function stopAutoPlay() { clearInterval(autoPlayInterval); autoPlayInterval = null; playBtn.textContent = '▶'; playBtn.title = 'Reproduzir'; }
+            playBtn.addEventListener('click', () => { if (autoPlayInterval) { stopAutoPlay(); } else { startAutoPlay(); } });
+            imageWrapper.addEventListener('mousedown', (e) => { e.preventDefault(); panning = true; startX = e.clientX - pointX; startY = e.clientY - pointY; imageWrapper.style.cursor = 'grabbing'; });
+            document.addEventListener('mousemove', (e) => { if (!panning) return; e.preventDefault(); pointX = e.clientX - startX; pointY = e.clientY - startY; updateTransform(); });
+            document.addEventListener('mouseup', () => { panning = false; imageWrapper.style.cursor = 'grab'; });
+            imageWrapper.addEventListener('wheel', (e) => { e.preventDefault(); scale = Math.min(Math.max(scale * (e.deltaY > 0 ? 0.9 : 1.1), 0.5), 5); updateTransform(); });
+        });
+    </script>
+</body>
+</html>
