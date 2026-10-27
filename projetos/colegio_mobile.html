@@ -370,27 +370,19 @@
   <script>
     const map = L.map('map').setView([-23.5985457415217, -46.66920089296921], 14);
 
-    const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
-    });
-
-    const cartoDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
+    const osmStandard = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
     });
 
     const googleMapsSatellite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-      attribution: ' Google Satellite'
+      attribution: '&copy; Google Satellite'
     });
 
-    cartoPositron.addTo(map);
+    osmStandard.addTo(map);
 
     const baseLayers = {
-      "Carto (Positron)": cartoPositron,
-      "Carto (Dark)": cartoDark,
+      "OpenStreetMap": osmStandard,
       "Google Maps (Satélite)": googleMapsSatellite
     };
 

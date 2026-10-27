@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caio Yamamoto • Portfólio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/mediaqueries.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+    <style>
+        /* ── Wrapper (coluna direita do content-project) ──────── */
+        .eleicoes-viewer-wrapper {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* ── Tabs ────────────────────────────────────────────── */
+        .eleicoes-tabs {
+            display: flex;
+            gap: 6px;
+        }
+        .eleicoes-tab {
+            flex: 1;
+            padding: 7px 14px;
+            border: 1.5px solid #ccc;
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.18s;
+        }
+        .eleicoes-tab.active  { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
+        .eleicoes-tab:not(.active):hover { border-color: #555; color: #1a1a1a; }
+
+        /* ── Viewer: thumbs + vídeo lado a lado ──────────────── */
+        .eleicoes-map-container {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        /* Faixa de thumbnails — SEMPRE vertical, nunca horizontal */
+        .eleicoes-thumbs {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 7px;
+            flex-shrink: 0;
+            width: 108px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            max-height: 560px;
+        }
+        /* Nome de cada thumb — sempre visível, texto curto se não couber */
+        .eleicoes-thumbs .thumb span {
+            font-size: 11px !important;
+            padding: 3px 5px !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Video panel */
+        .eleicoes-video-panel {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .eleicoes-video-panel video {
+            width: auto;
+            max-height: 560px;
+            max-width: 100%;
+            border-radius: 10px;
+            background: #111;
+            display: block;
+        }
+
+        /* Nav bar */
+        .eleicoes-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .eleicoes-nav button {
+            padding: 5px 14px;
+            min-height: 32px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .eleicoes-nav button:hover { background: #f3f3f3; border-color: #999; }
+        .eleicoes-caption {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Credits */
+        .eleicoes-credits {
+            padding-top: 18px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.83rem;
+            color: #777;
+            line-height: 1.65;
+        }
+        .eleicoes-credits a { color: #555; }
+
+        /* ── Tablet/mobile: mantém thumbs verticais à esquerda ── */
+        @media screen and (max-width: 1366px) {
+            /* Override mediaqueries.css que coloca thumbs em row */
+            .eleicoes-thumbs {
+                flex-direction: column !important;
+                width: 90px !important;
+                max-height: 500px !important;
+                overflow-x: hidden !important;
+            }
+            .eleicoes-map-container { flex-direction: row !important; }
+            .eleicoes-video-panel video { width: 100%; max-height: 65vh; }
+        }
+
+        @media screen and (max-width: 768px) {
+            /* Override styles.css que coloca thumbs em row */
+            .eleicoes-thumbs {
+                flex-direction: column !important;
+                width: 72px !important;
+                max-height: 380px !important;
+                overflow-x: hidden !important;
+            }
+            .eleicoes-thumbs .thumb span { font-size: 9px !important; }
+            .eleicoes-map-container { flex-direction: row !important; gap: 8px; }
+            .eleicoes-video-panel video { border-radius: 8px; max-height: none; }
+            .eleicoes-tab { font-size: 0.85rem; padding: 7px 10px; }
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X55DR6SDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1X55DR6SDZ');
+</script>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <script>
+            fetch('../header.html')
+                .then(r => r.text())
+                .then(d => { document.getElementById('header-placeholder').innerHTML = d; });
+        </script>
+        <section id="project">
+            <div class="container">
+                <div class="header">
+                    <h2>A terra não vota, quem vota são as pessoas</h2>
+                    <hr>
+                </div>
+                <div class="content-project">
+
+                    <!-- Texto (coluna esquerda) -->
+                    <div class="text-project">
+                        <p>A terra não vota, mas as pessoas, sim. <em>(tradução livre, e meio anglicista, de "Land doesn't vote, people do")</em>.</p>
+                        <p>Fiz uma série de mapas animados com os dados do 1º turno de 2026 para mostrar como o mapa típico de "Candidato mais votado por município/estado" exagera o peso de áreas extensas e pouco povoadas nos resultados eleitorais. Publicada no Instagram, a série foi vista mais de 300 mil vezes.</p>
+                    </div>
+
+                    <!-- Viewer (coluna direita) -->
+                    <div class="eleicoes-viewer-wrapper">
+
+                        <!-- Tabs -->
+                        <div class="eleicoes-tabs">
+                            <button class="eleicoes-tab active" data-group="sudeste">Sudeste</button>
+                            <button class="eleicoes-tab" data-group="nordeste">Nordeste</button>
+                        </div>
+
+                        <!-- Thumbs + vídeo -->
+                        <div class="eleicoes-map-container">
+
+                            <!-- Thumbnails Sudeste -->
+                            <div class="map-thumbnails eleicoes-thumbs" id="thumbs-sudeste">
+                                <div class="thumb active" data-index="0" data-group="sudeste">
+                                    <img src="../assets/imagens/eleicoes/sudeste-01-capa.jpg" alt="Capa" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Capa</span>
+                                </div>
+                                <div class="thumb" data-index="1" data-group="sudeste">
+                                    <img src="../assets/imagens/eleicoes/sudeste-02-regiao.jpg" alt="Região Sudeste" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Região</span>
+                                </div>
+                                <div class="thumb" data-index="2" data-group="sudeste">
+                                    <img src="../assets/imagens/eleicoes/sudeste-03-sp.jpg" alt="São Paulo" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">São Paulo</span>
+                                </div>
+                                <div class="thumb" data-index="3" data-group="sudeste">
+                                    <img src="../assets/imagens/eleicoes/sudeste-04-mg.jpg" alt="Minas Gerais" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Minas Gerais</span>
+                                </div>
+                                <div class="thumb" data-index="4" data-group="sudeste">
+                                    <img src="../assets/imagens/eleicoes/sudeste-05-rj.jpg" alt="Rio de Janeiro" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Rio de Janeiro</span>
+                                </div>
+                                <div class="thumb" data-index="5" data-group="sudeste">
+                                    <img src="../assets/imagens/eleicoes/sudeste-06-es.jpg" alt="Espírito Santo" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Espírito Santo</span>
+                                </div>
+                                <div class="thumb" data-index="6" data-group="sudeste">
+                                    <img src="../assets/imagens/eleicoes/sudeste-07-reflexao.jpg" alt="Reflexão" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Reflexão</span>
+                                </div>
+                            </div>
+
+                            <!-- Thumbnails Nordeste -->
+                            <div class="map-thumbnails eleicoes-thumbs" id="thumbs-nordeste" style="display:none">
+                                <div class="thumb active" data-index="0" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-01-capa.jpg" alt="Capa" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Capa</span>
+                                </div>
+                                <div class="thumb" data-index="1" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-02-regiao.jpg" alt="Região Nordeste" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Região</span>
+                                </div>
+                                <div class="thumb" data-index="2" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-03-ba.jpg" alt="Bahia" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Bahia</span>
+                                </div>
+                                <div class="thumb" data-index="3" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-04-pe.jpg" alt="Pernambuco" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Pernambuco</span>
+                                </div>
+                                <div class="thumb" data-index="4" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-05-ce.jpg" alt="Ceará" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Ceará</span>
+                                </div>
+                                <div class="thumb" data-index="5" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-06-ma.jpg" alt="Maranhão" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Maranhão</span>
+                                </div>
+                                <div class="thumb" data-index="6" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-07-pb.jpg" alt="Paraíba" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Paraíba</span>
+                                </div>
+                                <div class="thumb" data-index="7" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-08-rn.jpg" alt="Rio Grande do Norte" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">R. G. Norte</span>
+                                </div>
+                                <div class="thumb" data-index="8" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-09-al.jpg" alt="Alagoas" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Alagoas</span>
+                                </div>
+                                <div class="thumb" data-index="9" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-10-pi.jpg" alt="Piauí" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Piauí</span>
+                                </div>
+                                <div class="thumb" data-index="10" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-11-se.jpg" alt="Sergipe" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Sergipe</span>
+                                </div>
+                                <div class="thumb" data-index="11" data-group="nordeste">
+                                    <img src="../assets/imagens/eleicoes/nordeste-12-reflexao.jpg" alt="Reflexão" style="pointer-events:none;-webkit-user-drag:none">
+                                    <span style="pointer-events:none">Reflexão</span>
+                                </div>
+                            </div>
+
+                            <!-- Player -->
+                            <div class="eleicoes-video-panel">
+                                <video id="main-video" muted playsinline controls preload="none"
+                                       poster="../assets/imagens/eleicoes/sudeste-01-capa.jpg">
+                                    <source id="video-src" src="../assets/videos/eleicoes/sudeste-01-capa.mp4" type="video/mp4">
+                                </video>
+                                <div class="eleicoes-nav">
+                                    <button id="prev-video" title="Anterior">←</button>
+                                    <span class="eleicoes-caption" id="video-caption">Capa — Sudeste</span>
+                                    <button id="next-video" title="Próximo">→</button>
+                                </div>
+                            </div>
+                        </div><!-- .eleicoes-map-container -->
+
+                        <!-- Créditos -->
+                        <div class="eleicoes-credits">
+                            <p><strong>Dados:</strong> TSE – Portal de Dados Abertos (Presidente, 1º turno, 04/10/2026). <strong>Geometria:</strong> IBGE via {geobr}. <strong>Ferramentas:</strong> R (sf, ggplot2, tweenr, magick, av). <strong>Elaboração:</strong> Caio Yamamoto. <a href="https://www.instagram.com/p/DeSYUWwiDRC/" target="_blank">Ver no Instagram</a>.</p>
+                            <p><strong>Inspiração:</strong> Karim Douïeb ("Land doesn't vote, people do"), David Zumbach (<a href="https://github.com/zumbov2/votemapswitzerland" target="_blank">votemapswitzerland</a>) e Owen Winter. <strong>Referências:</strong> Harley (1989), Monmonier (1991), Wood (1992).</p>
+                        </div>
+
+                    </div><!-- .eleicoes-viewer-wrapper -->
+
+                </div><!-- .content-project -->
+            </div>
+        </section>
+    </div>
+    <script src="../js/scripts.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const video = document.getElementById('main-video');
+        const videoSrc = document.getElementById('video-src');
+        const caption = document.getElementById('video-caption');
+
+        const groups = {
+            sudeste: [
+                { src: '../assets/videos/eleicoes/sudeste-01-capa.mp4',     poster: '../assets/imagens/eleicoes/sudeste-01-capa.jpg',     label: 'Capa — Sudeste' },
+                { src: '../assets/videos/eleicoes/sudeste-02-regiao.mp4',   poster: '../assets/imagens/eleicoes/sudeste-02-regiao.jpg',   label: 'Região Sudeste' },
+                { src: '../assets/videos/eleicoes/sudeste-03-sp.mp4',       poster: '../assets/imagens/eleicoes/sudeste-03-sp.jpg',       label: 'São Paulo' },
+                { src: '../assets/videos/eleicoes/sudeste-04-mg.mp4',       poster: '../assets/imagens/eleicoes/sudeste-04-mg.jpg',       label: 'Minas Gerais' },
+                { src: '../assets/videos/eleicoes/sudeste-05-rj.mp4',       poster: '../assets/imagens/eleicoes/sudeste-05-rj.jpg',       label: 'Rio de Janeiro' },
+                { src: '../assets/videos/eleicoes/sudeste-06-es.mp4',       poster: '../assets/imagens/eleicoes/sudeste-06-es.jpg',       label: 'Espírito Santo' },
+                { src: '../assets/videos/eleicoes/sudeste-07-reflexao.mp4', poster: '../assets/imagens/eleicoes/sudeste-07-reflexao.jpg', label: 'Reflexão: mapas não são neutros' }
+            ],
+            nordeste: [
+                { src: '../assets/videos/eleicoes/nordeste-01-capa.mp4',     poster: '../assets/imagens/eleicoes/nordeste-01-capa.jpg',     label: 'Capa — Nordeste' },
+                { src: '../assets/videos/eleicoes/nordeste-02-regiao.mp4',   poster: '../assets/imagens/eleicoes/nordeste-02-regiao.jpg',   label: 'Região Nordeste' },
+                { src: '../assets/videos/eleicoes/nordeste-03-ba.mp4',       poster: '../assets/imagens/eleicoes/nordeste-03-ba.jpg',       label: 'Bahia' },
+                { src: '../assets/videos/eleicoes/nordeste-04-pe.mp4',       poster: '../assets/imagens/eleicoes/nordeste-04-pe.jpg',       label: 'Pernambuco' },
+                { src: '../assets/videos/eleicoes/nordeste-05-ce.mp4',       poster: '../assets/imagens/eleicoes/nordeste-05-ce.jpg',       label: 'Ceará' },
+                { src: '../assets/videos/eleicoes/nordeste-06-ma.mp4',       poster: '../assets/imagens/eleicoes/nordeste-06-ma.jpg',       label: 'Maranhão' },
+                { src: '../assets/videos/eleicoes/nordeste-07-pb.mp4',       poster: '../assets/imagens/eleicoes/nordeste-07-pb.jpg',       label: 'Paraíba' },
+                { src: '../assets/videos/eleicoes/nordeste-08-rn.mp4',       poster: '../assets/imagens/eleicoes/nordeste-08-rn.jpg',       label: 'Rio Grande do Norte' },
+                { src: '../assets/videos/eleicoes/nordeste-09-al.mp4',       poster: '../assets/imagens/eleicoes/nordeste-09-al.jpg',       label: 'Alagoas' },
+                { src: '../assets/videos/eleicoes/nordeste-10-pi.mp4',       poster: '../assets/imagens/eleicoes/nordeste-10-pi.jpg',       label: 'Piauí' },
+                { src: '../assets/videos/eleicoes/nordeste-11-se.mp4',       poster: '../assets/imagens/eleicoes/nordeste-11-se.jpg',       label: 'Sergipe' },
+                { src: '../assets/videos/eleicoes/nordeste-12-reflexao.mp4', poster: '../assets/imagens/eleicoes/nordeste-12-reflexao.jpg', label: 'Reflexão: mapas não são neutros' }
+            ]
+        };
+
+        let activeGroup = 'sudeste';
+        let activeIndex = 0;
+
+        function loadSlide(group, index) {
+            const item = groups[group][index];
+            video.pause();
+            videoSrc.src = item.src;
+            video.poster = item.poster;
+            video.load();
+            video.play().catch(() => {});
+            caption.textContent = item.label;
+            activeGroup = group;
+            activeIndex = index;
+
+            document.querySelectorAll(`#thumbs-${group} .thumb`).forEach((t, i) => {
+                t.classList.toggle('active', i === index);
+            });
+        }
+
+        document.querySelectorAll('.eleicoes-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const g = tab.dataset.group;
+                document.querySelectorAll('.eleicoes-tab').forEach(t => t.classList.toggle('active', t === tab));
+                document.getElementById('thumbs-sudeste').style.display = g === 'sudeste' ? '' : 'none';
+                document.getElementById('thumbs-nordeste').style.display = g === 'nordeste' ? '' : 'none';
+                loadSlide(g, 0);
+            });
+        });
+
+        document.querySelectorAll('.thumb[data-group]').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                loadSlide(thumb.dataset.group, parseInt(thumb.dataset.index));
+            });
+        });
+
+        document.getElementById('prev-video').addEventListener('click', () => {
+            const list = groups[activeGroup];
+            loadSlide(activeGroup, (activeIndex - 1 + list.length) % list.length);
+        });
+        document.getElementById('next-video').addEventListener('click', () => {
+            const list = groups[activeGroup];
+            loadSlide(activeGroup, (activeIndex + 1) % list.length);
+        });
+
+        loadSlide('sudeste', 0);
+    });
+    </script>
+</body>
+</html>

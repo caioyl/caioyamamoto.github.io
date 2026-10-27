@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caio Yamamoto • Portfólio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/mediaqueries.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+    <style>
+        .video-project-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        .video-project-wrapper video {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 10px;
+            background: #111;
+            display: block;
+        }
+        .video-project-caption {
+            font-size: 0.85rem;
+            color: #888;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1X55DR6SDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1X55DR6SDZ');
+</script>
+<body>
+    <div class="container">
+        <div id="header-placeholder"></div>
+        <script>
+            fetch('../header.html')
+                .then(r => r.text())
+                .then(d => { document.getElementById('header-placeholder').innerHTML = d; });
+        </script>
+        <section id="project">
+            <div class="container">
+                <div class="header">
+                    <h2>Vinheta - Geografia Histórica de São Paulo</h2>
+                    <hr>
+                </div>
+                <div class="content-project">
+                    <div class="text-project">
+                        <p>Abertura de um vídeo de divulgação científica sobre a geografia histórica de São Paulo, produzido no âmbito de um projeto da disciplina de Iniciação à Pesquisa do departamento de Geografia da USP.</p>
+                        <p>A vinheta usa animação de texto, sobreposição de cartografias históricas e transições para introduzir a temática da formação territorial da cidade. Feita inteiramente no After Effects.</p>
+                    </div>
+                    <div class="video-project-wrapper">
+                        <video controls playsinline preload="metadata">
+                            <source src="../assets/videos/vinheta-sp.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-project-caption">Vinheta de abertura · After Effects · 2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="../js/scripts.js"></script>
+</body>
+</html>
